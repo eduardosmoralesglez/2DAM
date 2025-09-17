@@ -1,9 +1,8 @@
 <?php
+$contador = 1;
 
-echo "Hello World!";
-
-echo "<br>";
-
-echo "Eduardo Serafín Morales González"
-
+do {
+    echo "Número: $contador\n";
+    $contador++;
+} while ($contador <= 5);
 ?>
