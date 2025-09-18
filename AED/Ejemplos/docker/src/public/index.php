@@ -1,8 +1,5 @@
 <?php
-$contador = 1;
-
-do {
-    echo "Número: $contador\n";
-    $contador++;
-} while ($contador <= 5);
+    for ($i=0; $i < 51; $i++) {
+        
+    }
 ?>
