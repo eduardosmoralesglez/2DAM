@@ -1,10 +1,7 @@
 <?php 
-    declare( strict_type=1);
-    function esCapicua(int $n) {
-        $arrayInt = $n.str_split(1);
-        foreach ($arrayInt as $key => $value) {
-            echo $value;
-        }
+    declare(strict_types=1);
+    function sumaDigitos(int $n): int {
+        
     }
-    echo esCapicua(123321);
+    echo sumaDigitos(12);
 ?>
