@@ -1,3 +1,6 @@
 [submodule "AED/unidad1/tarea1/Repo-Tarea"]
 	path = AED/unidad1/tarea1/Repo-Tarea
 	url = https://github.com/eduardosmoralesglez/Creaci-n-y-uso-de-elementos-b-sicos-en-php
+[submodule "AED/unidad1/tarea2/Introducci-n-a-Php-uso-de-funciones"]
+	path = AED/unidad1/tarea2/Introducci-n-a-Php-uso-de-funciones
+	url = https://github.com/eduardosmoralesglez/Introducci-n-a-Php-uso-de-funciones
