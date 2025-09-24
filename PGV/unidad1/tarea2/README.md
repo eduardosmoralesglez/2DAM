@@ -2,6 +2,8 @@
 
 ## Preparación
 
+### Eduardo Serafín Morales González
+
 Crea tu área de trabajo y variables útiles:
 
 ```bash
@@ -156,7 +158,18 @@ systemctl --user status fecha-log.service --no-pager -l | sed -n '1,10p'
 **Salida (pega un extracto):**
 
 ```text
+Failed to dump process list for 'fecha-log.service', ignoring: Unit fecha-log.service not loaded.
+● fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log
+     Loaded: loaded (/home/dam/.config/systemd/user/fecha-log.service; static)
+     Active: active (running) since Wed 2025-09-24 16:28:02 WEST; 8ms ago
+   Main PID: 18644 (bash)
+      Tasks: 2 (limit: 37621)
+     Memory: 716.0K (peak: 940.0K)
+        CPU: 3ms
+     CGroup: /user.slice/user-1001.slice/user@1001.service/app.slice/fecha-log.service
 
+sep 24 16:28:02 a108pc21 systemd[3458]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+ dam  ~  
 ```
 **Pregunta:** ¿Se creó/actualizó `~/dam/logs/fecha.log`? Muestra las últimas líneas:
 
@@ -167,7 +180,9 @@ tail -n 5 "$DAM/logs/fecha.log"
 **Salida:**
 
 ```text
-
+ dam  ~  SIGINT  tail -n 5 "$DAM/logs/fecha.log"
+2025-09-24T16:28:02+01:00 :: hello from user timer
+ dam  ~  
 ```
 
 **Reflexiona la salida:**
@@ -202,11 +217,14 @@ systemctl --user list-timers --all | grep fecha-log || true
 **Salida (recorta):**
 
 ```text
+Created symlink /home/dam/.config/systemd/user/timers.target.wants/fecha-log.timer → /home/dam/.config/systemd/user/fecha-log.timer.
+Wed 2025-09-24 16:30:00 WEST   4s -                                    - fecha-log.timer                fecha-log.service
+ dam  ~  
 
 ```
 **Pregunta:** ¿Qué diferencia hay entre `enable` y `start` cuando usas `systemctl --user`?  
 
-**Respuesta:**
+**Respuesta:** 
 
 ---
 
@@ -219,11 +237,14 @@ journalctl --user -u fecha-log.service -n 10 --no-pager
 **Salida:**
 
 ```text
-
+ dam  ~  journalctl --user -u fecha-log.service -n 10 --no-pager
+sep 24 16:28:02 a108pc21 systemd[3458]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+sep 24 16:30:33 a108pc21 systemd[3458]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+ dam  ~  
 ```
 **Pregunta:** ¿Ves ejecuciones activadas por el timer? ¿Cuándo fue la última?  
 
-**Respuesta:**
+**Respuesta:** Se ven 2 ejecuciones del fechas.log, el 24 sep a las 4:26 y 4:30
 
 ---
 
@@ -237,11 +258,14 @@ lsof -i -P -n | grep LISTEN || ss -lntp
 **Salida:**
 
 ```text
-
+ dam  ~  lsof -i -P -n | grep LISTEN || ss -lntp
+adb        9993  dam   11u  IPv4  53943      0t0  TCP 127.0.0.1:5037 (LISTEN)
+java      16908  dam  110u  IPv6  63398      0t0  TCP 127.0.0.1:43661 (LISTEN)
+ dam  ~  
 ```
 **Pregunta:** ¿Qué procesos *tuyos* están escuchando? (si no hay, explica por qué)  
 
-**Respuesta:**
+**Respuesta:** adb y java estan escuchando
 
 ---
 
@@ -255,11 +279,12 @@ ps -eo pid,ppid,cmd,stat | grep "[s]leep 200"
 **Salida:**
 
 ```text
+Running as unit: run-rf7189112d83a4d3c8f1221601d1c4f1e.scope; invocation ID: 47eae83301584d0cba0273ea26d5e4ea
 
 ```
 **Pregunta:** ¿Qué ventaja tiene lanzar con `systemd-run --user` respecto a ejecutarlo “a pelo”?  
 
-**Respuesta:**
+**Respuesta:** 
 
 ---
 
@@ -271,11 +296,25 @@ top -b -n 1 | head -n 15
 **Salida (resumen):**
 
 ```text
+top - 16:34:17 up 33 min,  1 user,  load average: 0,30, 0,52, 0,62
+Tareas: 407 total,   2 ejecutar,  405 hibernar,    0 detener,    0 zombie
+%Cpu(s):  0,0 us,  0,7 sy,  0,0 ni, 98,0 id,  1,3 wa,  0,0 hi,  0,0 si,  0,0 st 
+MiB Mem :  31453,3 total,  24494,4 libre,   4382,0 usado,   3067,1 búf/caché    
+MiB Intercambio:   2048,0 total,   2048,0 libre,      0,0 usado.  27071,2 dispon
 
+    PID USUARIO   PR  NI    VIRT    RES    SHR S  %CPU  %MEM     HORA+ ORDEN
+  21490 dam       20   0   17224   5760   3584 R   9,1   0,0   0:00.02 top
+      1 root      20   0   23436  14152   9288 S   0,0   0,0   0:01.46 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0,0   0,0   0:00.00 pool_wo+
+      4 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker+
+      5 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker+
+      6 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker+
+      7 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker+
 ```
 **Pregunta:** ¿Cuál es tu proceso con mayor `%CPU` en ese momento?  
 
-**Respuesta:**
+**Respuesta:** El proceso top de mi usuario dam
 
 ---
 
@@ -309,7 +348,56 @@ pstree -p | head -n 50
 **Salida (recorta):**
 
 ```text
-
+systemd(1)-+-ModemManager(1861)-+-{ModemManager}(1871)
+           |                    |-{ModemManager}(1873)
+           |                    `-{ModemManager}(1875)
+           |-NetworkManager(1834)-+-{NetworkManager}(1866)
+           |                      |-{NetworkManager}(1867)
+           |                      `-{NetworkManager}(1868)
+           |-accounts-daemon(1184)-+-{accounts-daemon}(1211)
+           |                       |-{accounts-daemon}(1212)
+           |                       `-{accounts-daemon}(1830)
+           |-agetty(2281)
+           |-apache2(2357)-+-apache2(2375)
+           |               |-apache2(2376)
+           |               |-apache2(2377)
+           |               |-apache2(2378)
+           |               `-apache2(2379)
+           |-at-spi2-registr(3813)-+-{at-spi2-registr}(3818)
+           |                       |-{at-spi2-registr}(3819)
+           |                       `-{at-spi2-registr}(3820)
+           |-avahi-daemon(1186)---avahi-daemon(1272)
+           |-blkmapd(1175)
+           |-colord(2029)-+-{colord}(2036)
+           |              |-{colord}(2037)
+           |              `-{colord}(2039)
+           |-containerd(2006)-+-{containerd}(2031)
+           |                  |-{containerd}(2032)
+           |                  |-{containerd}(2033)
+           |                  |-{containerd}(2034)
+           |                  |-{containerd}(2035)
+           |                  |-{containerd}(2057)
+           |                  |-{containerd}(2058)
+           |                  |-{containerd}(2059)
+           |                  |-{containerd}(2070)
+           |                  |-{containerd}(2071)
+           |                  |-{containerd}(2077)
+           |                  |-{containerd}(2078)
+           |                  `-{containerd}(2079)
+           |-containerd-shim(3256)-+-apache2(3279)-+-apache2(3391)
+           |                       |               |-apache2(3392)
+           |                       |               |-apache2(3393)
+           |                       |               |-apache2(3394)
+           |                       |               `-apache2(3395)
+           |                       |-{containerd-shim}(3257)
+           |                       |-{containerd-shim}(3258)
+           |                       |-{containerd-shim}(3259)
+           |                       |-{containerd-shim}(3260)
+           |                       |-{containerd-shim}(3261)
+           |                       |-{containerd-shim}(3262)
+           |                       |-{containerd-shim}(3263)
+           |                       |-{containerd-shim}(3264)
+           |                       |-{containerd-shim}(3265)
 ```
 **Pregunta:** ¿Bajo qué proceso aparece tu `systemd --user`?  
 
@@ -325,7 +413,26 @@ ps -eo pid,ppid,stat,cmd | head -n 20
 **Salida:**
 
 ```text
-
+    PID    PPID STAT CMD
+      1       0 Ss   /sbin/init splash
+      2       0 S    [kthreadd]
+      3       2 S    [pool_workqueue_release]
+      4       2 I<   [kworker/R-rcu_g]
+      5       2 I<   [kworker/R-rcu_p]
+      6       2 I<   [kworker/R-slub_]
+      7       2 I<   [kworker/R-netns]
+      8       2 I    [kworker/0:0-events]
+     10       2 I<   [kworker/0:0H-events_highpri]
+     12       2 I<   [kworker/R-mm_pe]
+     13       2 I    [rcu_tasks_kthread]
+     14       2 I    [rcu_tasks_rude_kthread]
+     15       2 I    [rcu_tasks_trace_kthread]
+     16       2 S    [ksoftirqd/0]
+     17       2 I    [rcu_preempt]
+     18       2 S    [migration/0]
+     19       2 S    [idle_inject/0]
+     20       2 S    [cpuhp/0]
+     21       2 S    [cpuhp/1]
 ```
 **Pregunta:** Explica 3 flags de `STAT` que veas (ej.: `R`, `S`, `T`, `Z`, `+`).  
 
@@ -351,6 +458,13 @@ ps -o pid,stat,cmd -p "$pid"
 **Pega los dos estados (antes/después):**
 
 ```text
+[1] 27460
+
+[1]+  Detenido                sleep 120
+    PID STAT CMD
+  27460 T    bash
+    PID STAT CMD
+  27460 S    sleep 120
 
 ```
 **Pregunta:** ¿Qué flag indicó la suspensión?  
@@ -377,7 +491,7 @@ ps -el | grep ' Z '
 **Salida (recorta):**
 
 ```text
-
+[2] 27730
 ```
 **Pregunta:** ¿Por qué el estado `Z` y qué lo limpia finalmente?  
 
@@ -397,6 +511,18 @@ systemctl --user daemon-reload
 rm -rf "$DAM/bin" "$DAM/logs" "$DAM/units"
 ```
 
+```text
+Removed "/home/dam/.config/systemd/user/timers.target.wants/fecha-log.timer".
+'/home/dam/.config/systemd/user/fecha-log.service' borrado
+'/home/dam/.config/systemd/user/fecha-log.timer' borrado
+'/home/dam/dam/bin/zombie.c' borrado
+'/home/dam/dam/bin/fecha_log.sh' borrado
+'/home/dam/dam/bin/zombie' borrado
+removed directory '/home/dam/dam/bin'
+'/home/dam/dam/logs/fecha.log' borrado
+removed directory '/home/dam/dam/logs'
+removed directory '/home/dam/dam/units'
+```
 ---
 
 ## ¿Qué estás prácticando?
