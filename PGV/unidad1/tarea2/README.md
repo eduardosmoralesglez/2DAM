@@ -348,60 +348,24 @@ pstree -p | head -n 50
 **Salida (recorta):**
 
 ```text
-systemd(1)-+-ModemManager(1861)-+-{ModemManager}(1871)
-           |                    |-{ModemManager}(1873)
-           |                    `-{ModemManager}(1875)
-           |-NetworkManager(1834)-+-{NetworkManager}(1866)
-           |                      |-{NetworkManager}(1867)
-           |                      `-{NetworkManager}(1868)
-           |-accounts-daemon(1184)-+-{accounts-daemon}(1211)
-           |                       |-{accounts-daemon}(1212)
-           |                       `-{accounts-daemon}(1830)
-           |-agetty(2281)
-           |-apache2(2357)-+-apache2(2375)
-           |               |-apache2(2376)
-           |               |-apache2(2377)
-           |               |-apache2(2378)
-           |               `-apache2(2379)
-           |-at-spi2-registr(3813)-+-{at-spi2-registr}(3818)
-           |                       |-{at-spi2-registr}(3819)
-           |                       `-{at-spi2-registr}(3820)
-           |-avahi-daemon(1186)---avahi-daemon(1272)
-           |-blkmapd(1175)
-           |-colord(2029)-+-{colord}(2036)
-           |              |-{colord}(2037)
-           |              `-{colord}(2039)
-           |-containerd(2006)-+-{containerd}(2031)
-           |                  |-{containerd}(2032)
-           |                  |-{containerd}(2033)
-           |                  |-{containerd}(2034)
-           |                  |-{containerd}(2035)
-           |                  |-{containerd}(2057)
-           |                  |-{containerd}(2058)
-           |                  |-{containerd}(2059)
-           |                  |-{containerd}(2070)
-           |                  |-{containerd}(2071)
-           |                  |-{containerd}(2077)
-           |                  |-{containerd}(2078)
-           |                  `-{containerd}(2079)
-           |-containerd-shim(3256)-+-apache2(3279)-+-apache2(3391)
-           |                       |               |-apache2(3392)
-           |                       |               |-apache2(3393)
-           |                       |               |-apache2(3394)
-           |                       |               `-apache2(3395)
-           |                       |-{containerd-shim}(3257)
-           |                       |-{containerd-shim}(3258)
-           |                       |-{containerd-shim}(3259)
-           |                       |-{containerd-shim}(3260)
-           |                       |-{containerd-shim}(3261)
-           |                       |-{containerd-shim}(3262)
-           |                       |-{containerd-shim}(3263)
-           |                       |-{containerd-shim}(3264)
-           |                       |-{containerd-shim}(3265)
+systemd(3458)─┬─(sd-pam)(3459)
+           │               ├─adb(9993)─┬─{adb}(9994)
+           │               │           ├─{adb}(9995)
+           │               │           ├─{adb}(9997)
+           │               │           ├─{adb}(9998)
+           │               │           ├─{adb}(9999)
+           │               │           └─{adb}(10001)
+           │               ├─chrome_crashpad(16329)─┬─{chrome_crashpad}(16330)
+           │               │                        └─{chrome_crashpad}(16331)
+           │               ├─code(16290)─┬─code(16299)───code(16347)─┬─{code}(16360)
+           │               │             │                           ├─{code}(16361)
+
+           
+
 ```
 **Pregunta:** ¿Bajo qué proceso aparece tu `systemd --user`?  
 
-**Respuesta:**
+**Respuesta:** Por el proceso 3458
 
 ---
 
@@ -436,7 +400,7 @@ ps -eo pid,ppid,stat,cmd | head -n 20
 ```
 **Pregunta:** Explica 3 flags de `STAT` que veas (ej.: `R`, `S`, `T`, `Z`, `+`).  
 
-**Respuesta:**
+**Respuesta:** S muestra que el proceso esta sleep o en espera, R es que esta running, Z es que el proceso es un zombie
 
 ---
 
@@ -469,7 +433,7 @@ ps -o pid,stat,cmd -p "$pid"
 ```
 **Pregunta:** ¿Qué flag indicó la suspensión?  
 
-**Respuesta:**
+**Respuesta:** La S es la bandera de suspención, el proceso pasa a estar en espera
 
 ---
 
@@ -495,7 +459,7 @@ ps -el | grep ' Z '
 ```
 **Pregunta:** ¿Por qué el estado `Z` y qué lo limpia finalmente?  
 
-**Respuesta:**
+**Respuesta:** Z es porque el proceso es un zombie, el proceso termino, pero todavia se muestra
 
 ---
 
