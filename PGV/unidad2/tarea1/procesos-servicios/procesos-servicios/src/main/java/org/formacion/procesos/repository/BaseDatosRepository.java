@@ -2,12 +2,12 @@ package org.formacion.procesos.repository;
 
 import org.springframework.stereotype.Repository;
 
-@Repository("ficheroRepository")
-public class FicheroRepository implements IFicheroRepository {
+@Repository("baseDatosRepository")
+public class BaseDatosRepository implements IFicheroRepository {
 
     @Override
     public String saludar() {
-        return "Saludo desde fichero";
+        return "Saludos desde Base de datos";
     }
 
 }
