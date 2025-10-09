@@ -1,13 +1,13 @@
 package org.formacion.procesos.service;
 
-import org.formacion.procesos.components.IFicheroComponent;
+import org.formacion.procesos.components.interfase.IFicheroComponent;
+import org.formacion.procesos.service.interfase.IProceso;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class Procesos {
-
+public class Procesos implements IProceso{
     
     IFicheroComponent componentFichero;
 
