@@ -1,13 +1,19 @@
-package org.formacion.procesos.controllers.abstractas;
+package org.formacion.procesos.services.abstractas;
 
 import java.util.List;
 
 import org.formacion.procesos.domains.ProcessType;
+import org.formacion.procesos.repositories.FileRepository;
+import org.formacion.procesos.repositories.interfaces.CrudInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class ComandoControllerAbstract {
+public abstract class ComandoServiceAbstract {
     String comando;
     List<String> parametros;
     ProcessType tipo;
+
+    @Autowired
+    CrudInterface CrudRepository;
 
     public ProcessType getTipo() {
         return tipo;
@@ -41,7 +47,7 @@ public abstract class ComandoControllerAbstract {
         String[] Arraycomando = linea.split(" ");
         this.setComando(Arraycomando[0]);
         System.out.println("Comando: " + getComando());
-        if (!this.getComando().toUpperCase().equals(getTipoToString())) {
+        if (!validar(Arraycomando)) {
             System.out.println("Comando invalido");
             return;
         }
@@ -68,5 +74,15 @@ public abstract class ComandoControllerAbstract {
     }
 
     public abstract void imprimeMensaje();
+
+    public abstract boolean validar(String[] arrayComando);
+
+    public boolean validarComando() {
+        if (!this.getComando().toUpperCase().equals(getTipoToString())) {
+            System.out.println("Comando invalido");
+            return false;
+        }
+        return true;
+    }
 
 }
