@@ -29,7 +29,7 @@ class SimpleBeanTest {
         XmlMapper xmlMapper = new XmlMapper();
         try {
             SimpleBean value = xmlMapper.readValue("<SimpleBean><x>1</x><y>2</y></SimpleBean>", SimpleBean.class);
-            assertTrue(xml.contains("<x>1</x>"));
+            assertTrue(value.contains("<x>1</x>"));
         } catch (Exception e) {
             Assertions.fail("Se a producido un error no controlado", e);
         }
