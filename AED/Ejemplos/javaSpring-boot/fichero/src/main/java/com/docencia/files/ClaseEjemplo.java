@@ -1,4 +1,4 @@
-package com.ejemplo.fichero;
+package com.docencia.files;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

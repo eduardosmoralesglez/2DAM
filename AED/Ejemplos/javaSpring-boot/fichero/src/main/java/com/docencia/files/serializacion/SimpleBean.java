@@ -1,4 +1,4 @@
-package com.ejemplo.fichero.serializacion;
+package com.docencia.files.serializacion;
 
 public class SimpleBean {
     private int x =1;

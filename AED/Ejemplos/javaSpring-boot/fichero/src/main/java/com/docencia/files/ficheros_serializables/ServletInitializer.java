@@ -1,4 +1,4 @@
-package com.ejemplo.fichero.ficheros_serializables;
+package com.docencia.files.ficheros_serializables;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

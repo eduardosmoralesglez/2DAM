@@ -1,4 +1,4 @@
-package com.ejemplo.fichero.ficheros_serializables;
+package com.docencia.files.ficheros_serializables;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
