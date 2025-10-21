@@ -9,18 +9,7 @@ public class ComandoPsService extends ComandoServiceAbstract {
 
     public ComandoPsService() {
         this.setTipo(ProcessType.PS);
+        this.setExprecionRegular("^((-?(xa|a|aux))|\s*?)$");
     }
-
-    @Override
-    public void imprimeMensaje() {
-        System.out.println("Estoy llamando a ComandoControllerPs");
-    }
-
-    @Override
-    public boolean validar(String[] arrayComando) {
-        if (!super.validarComando()) {
-            return false;
-        }
-        return true;
-    }
+    
 }

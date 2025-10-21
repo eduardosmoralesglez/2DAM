@@ -1,19 +1,27 @@
 package org.formacion.procesos.services.abstractas;
 
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.formacion.procesos.domains.ProcessType;
-import org.formacion.procesos.repositories.FileRepository;
 import org.formacion.procesos.repositories.interfaces.CrudInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class ComandoServiceAbstract {
-    String comando;
-    List<String> parametros;
-    ProcessType tipo;
+    private String comando;
+    private ProcessType tipo;
+    private String exprecionRegular;
 
     @Autowired
-    CrudInterface CrudRepository;
+    CrudInterface fielRepository;
+
+    public String getExprecionRegular() {
+        return this.exprecionRegular;
+    }
+
+    public void setExprecionRegular(String exprecionRegular) {
+        this.exprecionRegular = exprecionRegular;
+    }
 
     public ProcessType getTipo() {
         return tipo;
@@ -35,16 +43,8 @@ public abstract class ComandoServiceAbstract {
         this.comando = comando;
     }
 
-    public List<String> getParametros() {
-        return parametros;
-    }
-
-    public void setParametros(List<String> parametros) {
-        this.parametros = parametros;
-    }
-
     public void procesarLinea(String linea) {
-        String[] Arraycomando = linea.split(" ");
+        String[] Arraycomando = linea.split("\s*");
         this.setComando(Arraycomando[0]);
         System.out.println("Comando: " + getComando());
         if (!validar(Arraycomando)) {
@@ -61,7 +61,6 @@ public abstract class ComandoServiceAbstract {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        imprimeMensaje();
     };
 
     public boolean ejecutarProceso(Process proceso) {
@@ -73,9 +72,18 @@ public abstract class ComandoServiceAbstract {
         return true;
     }
 
-    public abstract void imprimeMensaje();
-
-    public abstract boolean validar(String[] arrayComando);
+    public boolean validar(String[] arrayComando) {
+        if (!validarComando()) {
+            return false;
+        }
+        String parametro = arrayComando[1];
+        Pattern pattern = Pattern.compile(exprecionRegular);
+        Matcher matcher = pattern.matcher(parametro);
+        if (!matcher.find()) {
+            return false;
+        }
+        return true;
+    }
 
     public boolean validarComando() {
         if (!this.getComando().toUpperCase().equals(getTipoToString())) {
