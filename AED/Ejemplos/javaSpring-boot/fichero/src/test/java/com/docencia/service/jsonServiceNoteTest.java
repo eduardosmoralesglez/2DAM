@@ -5,13 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.docencia.files.model.Note;
 
-public class xmlServiceNoteTest {
-    XmlServiceNote xmlServiceNote;
+public class jsonServiceNoteTest {
+    JsonServiceNote jsonServiceNote;
     Note note;
 
     @BeforeEach
     void beforeAll() {
-        xmlServiceNote = new XmlServiceNote();
+        jsonServiceNote = new JsonServiceNote();
         note = new Note();
         note.setId("1");
         note.setTitle("Titulo");
@@ -20,8 +20,8 @@ public class xmlServiceNoteTest {
 
     @Test
     void serializarNote() {
-        String noteStr = xmlServiceNote.noteToString(note);
-        Note noteTest = xmlServiceNote.stringToNote(noteStr);
+        String noteStr = jsonServiceNote.noteToString(note);
+        Note noteTest = jsonServiceNote.stringToNote(noteStr);
         Assertions.assertEquals(note, noteTest);
     }
 

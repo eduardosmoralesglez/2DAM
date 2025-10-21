@@ -1,6 +1,5 @@
 package com.docencia.repo;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -19,6 +18,7 @@ public class FileNoteRepository implements INoteRepository{
             e.printStackTrace();
         }
     }
+    
     /**
      * Se comprueba que el fichero existe, si es un directorio o fichero
      * Si no existe crealo

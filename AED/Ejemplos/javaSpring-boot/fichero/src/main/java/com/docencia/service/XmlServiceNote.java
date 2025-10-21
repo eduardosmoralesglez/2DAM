@@ -2,12 +2,17 @@ package com.docencia.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.docencia.files.model.Note;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-public class XmlServiceNote implements IServiceNote{
+public class XmlServiceNote extends ServiceNoteAbstract {
     ObjectMapper mapper;
+
+    private static Logger logger = LoggerFactory.getLogger(XmlServiceNote.class);
 
     public XmlServiceNote() {
         mapper = new XmlMapper();
@@ -49,7 +54,7 @@ public class XmlServiceNote implements IServiceNote{
         try {
             resultado = mapper.writeValueAsString(note);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Se a producido un error en la transformacion de note {}",note ,e);
         }
         return resultado;
     }
@@ -60,7 +65,7 @@ public class XmlServiceNote implements IServiceNote{
         try {
             return mapper.readValue(data, Note.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Se a producido un error en la transformacion de data {}",data ,e);
         } 
         return note;
     }
