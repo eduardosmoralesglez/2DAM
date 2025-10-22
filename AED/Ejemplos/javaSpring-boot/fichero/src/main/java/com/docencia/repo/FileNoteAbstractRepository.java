@@ -12,36 +12,38 @@ import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import com.docencia.files.model.Note;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-public class FileNoteRepository implements INoteRepository{
+public abstract class FileNoteAbstractRepository implements INoteRepository{
     private String nameFile;
     private Path path;
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    ObjectMapper mapper;
 
-    public FileNoteRepository() {
-        this.nameFile = "note-repository.txt";
-        try {
-            path = verificarFichero();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public FileNoteAbstractRepository(String nameFile, ObjectMapper mapper) {
+        this.nameFile = nameFile;
+        verificarFichero();
+        this.mapper = mapper;
     }
-    
-    /**
-     * Se comprueba que el fichero existe, si es un directorio o fichero
-     * Si no existe crealo
-     * @throws IOException 
-     */
-    private Path verificarFichero() throws IOException {
+
+    private Path verificarFichero() {
         URL resource;
         resource = getClass().getClassLoader().getResource(nameFile);
-        if (resource == null) {
-            throw new IOException("El fichero no existe "+ nameFile);
-        }
         path = Paths.get(resource.getPath());
         return path;
     }
+
+    private List<Note> readAllInternal() {
+        try {
+            if (!Files.exists(path) || Files.size(path) == 0) return new ArrayList<>();
+            Note[] arrayNotes = mapper.readValue(Files.readAllBytes(path), Note[].class);
+            return new ArrayList<>(Arrays.asList(arrayNotes));
+        } catch (IOException e) {
+            throw new RuntimeException("Error leyendo JSON", e);
+        }
+    }
+
 
     @Override
     public boolean exists(String id) {
@@ -79,15 +81,5 @@ public class FileNoteRepository implements INoteRepository{
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
-    private List<Note> readAllInternal() {
-        XmlMapper xmlMapper = new XmlMapper();
-        try {
-            if (!Files.exists(path) || Files.size(path) == 0) return new ArrayList<>();
-            Note[] arrayNotes = xmlMapper.readValue(Files.readAllBytes(path), Note[].class);
-            return new ArrayList<>(Arrays.asList(arrayNotes));
-        } catch (IOException e) {
-            throw new RuntimeException("Error leyendo JSON", e);
-        }
-    }
 
 }
