@@ -12,8 +12,16 @@ public abstract class ComandoServiceAbstract {
     private ProcessType tipo;
     private String exprecionRegular;
 
-    @Autowired
     CrudInterface fielRepository;
+
+    public CrudInterface getFielRepository() {
+        return this.fielRepository;
+    }
+
+    @Autowired
+    public void setFielRepository(CrudInterface fielRepository) {
+        this.fielRepository = fielRepository;
+    }
 
     public String getExprecionRegular() {
         return this.exprecionRegular;
@@ -66,6 +74,7 @@ public abstract class ComandoServiceAbstract {
     public boolean ejecutarProceso(Process proceso) {
         try {
             proceso.waitFor();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

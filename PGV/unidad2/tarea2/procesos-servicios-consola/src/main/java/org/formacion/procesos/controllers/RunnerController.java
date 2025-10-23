@@ -31,6 +31,7 @@ public class RunnerController {
         } else {
             comandoControllerLs.procesarLinea(linea);
         }
+        scanner.close();
     }
 
     private void helpConsola() {
