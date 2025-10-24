@@ -29,6 +29,10 @@ public class Note {
     public Note() {
     }
 
+    public Note(String id) {
+        this.id = id;
+    }
+
     /**
      * Constructor general
      * @param id

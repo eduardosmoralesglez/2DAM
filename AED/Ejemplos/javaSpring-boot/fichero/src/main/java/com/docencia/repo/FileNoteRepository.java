@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import com.docencia.files.model.Note;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-public class FileNoteRepository implements INoteRepository{
+public class FileNoteRepository extends FileNoteAbstractRepository{
     private String nameFile;
     private Path path;
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
@@ -51,9 +51,15 @@ public class FileNoteRepository implements INoteRepository{
 
     @Override
     public Note findById(String id) {
+        return null;
+    }
+
+    
+    public Note findById(Note note) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
+
 
     @Override
     public List<Note> findAll() {

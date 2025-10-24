@@ -7,6 +7,8 @@ import com.docencia.files.model.Note;
 public interface INoteRepository {
     public boolean exists(String id);
     public Note findById(String id);
+    public Note findById(Note note);
+    public Note find(Note note);
     public List<Note> findAll();
     public Note save(Note note);
     public boolean delete(String id);
