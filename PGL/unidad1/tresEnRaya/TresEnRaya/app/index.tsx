@@ -5,7 +5,7 @@ import {  TouchableOpacity, Text, View } from "react-native";
 
 type SquarePromps = {
   value: String
-  onSquareClick: MouseEventHandler<HTMLButtonElement>
+  onSquareClick:
 }
 
 type BoardProps = {
@@ -21,6 +21,9 @@ function Square({ value, onSquareClick }: SquarePromps) {
     <button className="square" onClick={onSquareClick}>
       {value}
     </button>
+    <TouchableOpacity on>
+
+    </TouchableOpacity>
   );
 }
 
