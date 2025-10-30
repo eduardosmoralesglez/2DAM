@@ -1,38 +1,30 @@
-package org.formacion.procesos.services.abstractas;
+package com.docencia.dam.services.abstracta;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.formacion.procesos.domains.ProcessType;
-import org.formacion.procesos.repositories.interfaces.CrudInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class ComandoServiceAbstract {
+import com.docencia.dam.domain.ProcessType;
+import com.docencia.dam.repositories.interfaces.JobRepository;
+
+public abstract class AbstractCommandService {
     private String comando;
     private ProcessType tipo;
-    private String exprecionRegular;
+    private String expresionRegular;
 
-    CrudInterface fielRepository;
+    JobRepository fileRepository;
 
-    public CrudInterface getFielRepository() {
-        return this.fielRepository;
+    public String getComando() {
+        return this.comando;
     }
 
-    @Autowired
-    public void setFielRepository(CrudInterface fielRepository) {
-        this.fielRepository = fielRepository;
-    }
-
-    public String getExprecionRegular() {
-        return this.exprecionRegular;
-    }
-
-    public void setExprecionRegular(String exprecionRegular) {
-        this.exprecionRegular = exprecionRegular;
+    public void setComando(String comando) {
+        this.comando = comando;
     }
 
     public ProcessType getTipo() {
-        return tipo;
+        return this.tipo;
     }
 
     public String getTipoToString() {
@@ -43,13 +35,23 @@ public abstract class ComandoServiceAbstract {
         this.tipo = tipo;
     }
 
-    public String getComando() {
-        return comando;
+    public String getExpresionRegular() {
+        return this.expresionRegular;
     }
 
-    public void setComando(String comando) {
-        this.comando = comando;
+    public void setExpresionRegular(String expresionRegular) {
+        this.expresionRegular = expresionRegular;
     }
+
+    public JobRepository getFileRepository() {
+        return this.fileRepository;
+    }
+
+    @Autowired
+    public void setFileRepository(JobRepository fileRepository) {
+        this.fileRepository = fileRepository;
+    }
+
 
     public void procesarLinea(String linea) {
         String[] Arraycomando = linea.split("\s+");
@@ -61,7 +63,6 @@ public abstract class ComandoServiceAbstract {
         }
 
         Process proceso1;
-        // linea = ps aux | grep java
         try {
             proceso1 = new ProcessBuilder("sh", "-c", linea + " > mis_procesos.txt")
                     .start();
@@ -81,13 +82,13 @@ public abstract class ComandoServiceAbstract {
         return true;
     }
 
-    //Cambiar el validar
+    // TODO: CAMBIAR EL VALIDADOR
     public boolean validar(String[] arrayComando) {
         if (!validarComando()) {
             return false;
         }
-        String parametro = arrayComando[1]; //ESTO HAY QUE CAMBIAR
-        Pattern pattern = Pattern.compile(exprecionRegular);
+        String parametro = arrayComando[1];// ESTA PARTE DA ERROR
+        Pattern pattern = Pattern.compile(expresionRegular);
         Matcher matcher = pattern.matcher(parametro);
         if (!matcher.find()) {
             return false;

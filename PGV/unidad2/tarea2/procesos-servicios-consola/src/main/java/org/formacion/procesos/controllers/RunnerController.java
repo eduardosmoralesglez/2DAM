@@ -34,12 +34,4 @@ public class RunnerController {
         scanner.close();
     }
 
-    private void helpConsola() {
-        System.out.println(
-                "Ejemplos\n" +
-                        "run PING host=8.8.8.8 count=4\n" +
-                        "run LIST_DIR path=.\n" +
-                        "run HASH_SHA256 file=README.md timeoutMs=5000\n");
-    }
-
 }
