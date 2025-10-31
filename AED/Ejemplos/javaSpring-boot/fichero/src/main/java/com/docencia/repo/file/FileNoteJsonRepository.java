@@ -1,4 +1,4 @@
-package com.docencia.repo;
+package com.docencia.repo.file;
 
 import com.docencia.files.model.Note;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -11,12 +11,10 @@ public class FileNoteJsonRepository extends FileNoteAbstractRepository {
         super(nameFile, mapper);
     }
 
-    @Override
+    
     public Note findById(Note note) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
-
-    
 
 }

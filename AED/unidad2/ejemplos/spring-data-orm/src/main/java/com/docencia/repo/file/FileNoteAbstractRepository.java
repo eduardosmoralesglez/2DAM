@@ -1,4 +1,4 @@
-package com.docencia.repo;
+package com.docencia.repo.file;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,36 +14,39 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import com.docencia.files.model.Note;
+import com.docencia.model.Note;
+import com.docencia.repo.INoteRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.micrometer.common.util.StringUtils;
 
-public abstract class FileNoteAbstractRepository implements INoteRepository{
+
+public abstract class FileNoteAbstractRepository implements INoteRepository {
+
     private String nameFile;
     private Path path;
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
     ObjectMapper mapper;
 
-
-    public FileNoteAbstractRepository() {}
+    public FileNoteAbstractRepository() { }
 
     public FileNoteAbstractRepository(String nameFile, ObjectMapper mapper) {
         this.nameFile = nameFile;
-        verificarFichero();
+        path = verificarFichero();
         this.mapper = mapper;
     }
 
     private Path verificarFichero() {
         URL resource;
         resource = getClass().getClassLoader().getResource(nameFile);
-        path = Paths.get(resource.getPath());
-        return path;
+        return Paths.get(resource.getPath());
+
     }
 
     private List<Note> readAllInternal() {
         try {
-            if (!Files.exists(path) || Files.size(path) == 0) return new ArrayList<>();
+            if (!Files.exists(path) || Files.size(path) == 0)
+                return new ArrayList<>();
             Note[] arrayNotes = mapper.readValue(Files.readAllBytes(path), Note[].class);
             return new ArrayList<>(Arrays.asList(arrayNotes));
         } catch (IOException e) {
@@ -71,18 +74,18 @@ public abstract class FileNoteAbstractRepository implements INoteRepository{
 
     @Override
     public Note findById(String id) {
-        Note elemento = new Note();
+        Note elemento = new Note(id);
         return find(elemento);
     }
 
     @Override
     public Note find(Note note) {
         List<Note> notes = findAll();
-        int posicion = notes.indexOf(note);
-        if (posicion < 0) {
+        int posicon = notes.indexOf(note);
+        if (posicon < 0 ) {
             return null;
         }
-        return notes.get(posicion);
+        return notes.get(posicon);
     }
 
     @Override
@@ -90,23 +93,22 @@ public abstract class FileNoteAbstractRepository implements INoteRepository{
         lock.readLock().lock();
         try {
             return Collections.unmodifiableList(readAllInternal());
-        } catch (Exception e) {
+        } finally {
             lock.readLock().unlock();
         }
-        return null;
     }
 
     @Override
     public Note save(Note note) {
-        lock.writeLock().lock();
+       lock.writeLock().lock();
         try {
-            List<Note> all = readAllInternal();
-            if (StringUtils.isEmpty(note.getId())) {
+            List<Note> notes = readAllInternal();
+            if (StringUtils.isEmpty(note.getId()))  {
                 note.setId(UUID.randomUUID().toString());
             }
-            all.removeIf(n -> Objects.equals(n.getId(), note.getId()));
-            all.add(note);
-            writeAllInternal(all);
+            notes.removeIf(n -> Objects.equals(n.getId(), note.getId()));
+            notes.add(note);
+            writeAllInternal(notes);
             return note;
         } finally {
             lock.writeLock().unlock();
@@ -118,6 +120,4 @@ public abstract class FileNoteAbstractRepository implements INoteRepository{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
-
-
 }
