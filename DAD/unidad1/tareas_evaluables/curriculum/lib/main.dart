@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+//TODO: Ajustar el encabezado y pie del curriculum, 
+//re-ajustar los colores deacuerdo con la plantilla,
+//colocar los iconos y marcos de la manera correcta
+
 void main() {
   runApp(const ResumeApp());
 }
