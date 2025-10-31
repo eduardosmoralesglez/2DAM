@@ -1,127 +1,143 @@
-import { MouseEventHandler, SetStateAction, useState } from "react";
-import {  TouchableOpacity, Text, View } from "react-native";
-//TODO: Ver el tutorial: https://www.youtube.com/watch?v=U23lNFm_J70
-//Curioso: https://medium.com/@siva2003sankar10/building-a-multiplayer-tic-tac-toe-game-with-react-native-and-apis-e1baa29e8f2d
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-type SquarePromps = {
-  value: String
-  onSquareClick:
-}
+// initial state of the tic tac toe board
+const initialBoard = Array(9).fill(null);
 
-type BoardProps = {
-  xIsNext:boolean
-  squares:any[]
-  onPlay:Function
-}
+const TicTacToeGame = () => {
+  const [board, setBoard] = useState(initialBoard); // board state
+  const [isPlayerTurn, setIsPlayerTurn] = useState(true); // player X's turn
+  const [winner, setWinner] = useState(null); // winner of the game
 
+  // check for a winner whenever the board state changes
+  useEffect(() => {
+    checkWinner();
+  }, [board]);
 
+  // check winner
+  const checkWinner = () => {
+    // define winning combinations / lines
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
 
-function Square({ value, onSquareClick }: SquarePromps) {
-  return (
-    <button className="square" onClick={onSquareClick}>
-      {value}
-    </button>
-    <TouchableOpacity on>
-
-    </TouchableOpacity>
-  );
-}
-
-function Board({ xIsNext, squares, onPlay }:BoardProps) {
-  function handleClick(i:number) {
-    if (calculateWinner(squares) || squares[i]) {
-      return;
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      // check values is in winning combination are the same and not null
+      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        setWinner(board[a]);
+        return;
+      }
     }
-    const nextSquares = squares.slice();
-    if (xIsNext) {
-      nextSquares[i] = 'X';
-    } else {
-      nextSquares[i] = 'O';
-    }
-    onPlay(nextSquares);
-  }
 
-  const winner = calculateWinner(squares);
-  let status;
-  if (winner) {
-    status = 'Ganador: ' + winner;
-  } else {
-    status = 'Siguiente jugador: ' + (xIsNext ? 'X' : 'O');
-  }
+    // check for draw if all squares are filled
+    if (board.every(square => square)) {
+      setWinner('draw');
+    }
+  };
+
+  // handle square press
+  const handleSquarePress = index => {
+    // check if the square is empty and there is no winner
+    if (!board[index] && !winner) {
+      // update the board with the player's move
+      const newBoard = [...board];
+      newBoard[index] = isPlayerTurn ? 'X' : 'O';
+      setBoard(newBoard);
+      // toggle player turn
+      setIsPlayerTurn(!isPlayerTurn);
+    }
+  };
+
+  // game reset
+  const handleReset = () => {
+    setBoard(initialBoard);
+    setIsPlayerTurn(true);
+    setWinner(null);
+  };
 
   return (
-    <View>
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+    <View style={styles.container}>
+      <View style={styles.board}>
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(index => (
+          <TouchableOpacity
+            key={5}
+            style={styles.square}
+            onPress={() => handleSquarePress(index)}
+            disabled={board[index] || winner}>
+            <Text
+              style={[
+                styles.squareText,
+                {color: board[index] === 'X' ? '#435585' : '#E5C3A6'},
+              ]}>
+              {board[index] ? board[index].toString() : ''}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      <Text style={styles.result}>
+        {winner
+          ? winner === 'draw'
+            ? "It's a draw"
+            : `Player ${winner} wins!`
+          : `Player ${isPlayerTurn ? 'X' : 'O'}'s turn`}
+      </Text>
+      <TouchableOpacity style={styles.button} onPress={handleReset}>
+        <Text style={styles.buttonText}>Reset Game</Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
-export default function Game() {
-  const [history, setHistory] = useState([Array(9).fill(String)]);
-  const [currentMove, setCurrentMove] = useState(0);
-  const xIsNext = currentMove % 2 === 0;
-  const currentSquares = history[currentMove];
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 30,
+  },
+  board: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    marginBottom: 20,
+  },
+  square: {
+    width: 100,
+    height: 100,
+    borderWidth: 2,
+    borderColor: '#363062',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  squareText: {
+    fontSize: 36,
+  },
+  result: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#363062',
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#363062',
+    paddingHorizontal: 40,
+    paddingVertical: 15,
+    marginHorizontal: 60,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'semibold',
+    textAlign: 'center',
+  },
+});
 
-  function handlePlay(nextSquares: any) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-    setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
-  }
-
-  function jumpTo(nextMove: SetStateAction<number>) {
-    setCurrentMove(nextMove);
-  }
-
-  const moves = history.map((squares, move) => {
-    let description;
-    if (move > 0) {
-      description = 'Ir al movimiento #' + move;
-    } else {
-      description = 'Ir al inicio del juego';
-    }
-    return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
-      </li>
-    );
-  });
-
-  return (
-    <div className="game">
-      <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      </div>
-      <div className="game-info">
-        <ol>{moves}</ol>
-      </div>
-    </div>
-  );
-}
-
-function calculateWinner(squares: any[]) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-}
+export default TicTacToeGame;
