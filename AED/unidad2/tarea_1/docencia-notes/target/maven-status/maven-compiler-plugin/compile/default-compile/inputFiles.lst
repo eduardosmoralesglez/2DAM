@@ -1,0 +1,5 @@
+/home/dam/Documentos/Repos/2DAM/AED/unidad2/tarea_1/docencia-notes/src/main/java/com/docencia/Application.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad2/tarea_1/docencia-notes/src/main/java/com/docencia/model/Note.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad2/tarea_1/docencia-notes/src/main/java/com/docencia/repo/INoteRepository.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad2/tarea_1/docencia-notes/src/main/java/com/docencia/repo/jpa/NoteJpaRepository.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad2/tarea_1/docencia-notes/src/main/java/com/docencia/repo/jpa/INoteJpaRepository.java
