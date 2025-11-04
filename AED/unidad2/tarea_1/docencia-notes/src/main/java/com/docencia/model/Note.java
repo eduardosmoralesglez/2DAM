@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "notes")
@@ -50,4 +51,21 @@ public class Note {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Note)) {
+            return false;
+        }
+        Note note = (Note) o;
+        return Objects.equals(id, note.id) && Objects.equals(title, note.title) && Objects.equals(content, note.content);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, content);
+    }
+    
 }
