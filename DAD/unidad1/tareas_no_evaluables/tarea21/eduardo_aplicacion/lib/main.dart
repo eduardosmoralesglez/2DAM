@@ -56,6 +56,8 @@ class BigCard extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>(); // ← ?? Lo entenderemos más adelante
