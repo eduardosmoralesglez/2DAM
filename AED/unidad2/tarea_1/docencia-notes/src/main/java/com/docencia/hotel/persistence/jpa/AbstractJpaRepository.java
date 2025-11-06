@@ -1,5 +1,8 @@
 package com.docencia.hotel.persistence.jpa;
 
-abstract class AbstractJpaRepository {
+import com.docencia.hotel.domain.repository.AbstractRepository;
 
+abstract class AbstractJpaRepository implements AbstractRepository {
+
+    
 }

@@ -1,5 +1,15 @@
 package com.docencia.hotel.domain.repository;
 
-public interface GuestRepository {
+import java.util.List;
+
+import com.docencia.hotel.model.Guest;
+
+public interface GuestRepository extends AbstractRepository{
+
+    Guest find(Guest example);
+
+    List<Guest> findAll();
+
+    Guest save(Guest note);
 
 }

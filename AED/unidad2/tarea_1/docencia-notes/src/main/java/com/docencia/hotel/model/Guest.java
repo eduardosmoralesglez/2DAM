@@ -21,6 +21,10 @@ public class Guest {
     public Guest() {
     }
 
+    public Guest(String id) {
+        this.id = id;
+    }
+
     public Guest(String id, String name, String email, String phone) {
         this.id = id;
         this.name = name;

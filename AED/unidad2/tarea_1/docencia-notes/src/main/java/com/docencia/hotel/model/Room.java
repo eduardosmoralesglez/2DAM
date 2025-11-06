@@ -30,16 +30,16 @@ public class Room {
     public Room() {
     }
 
+    public Room(int id) {
+        this.id = id;
+    }
+
     public Room(int id, int number, String type, double price, Hotel Hotel) {
         this.id = id;
         this.number = number;
         this.type = type;
         this.price = price;
         this.Hotel = Hotel;
-    }
-
-    public Room(int id) {
-        this.id = id;
     }
 
     public int getId() {
