@@ -18,13 +18,27 @@ public class Guest {
     @Column(name = "phone")
     private String phone;
 
+    /**
+     * Constructor por defecto
+     */
     public Guest() {
     }
 
+    /**
+     * Constructor identificador
+     * @param id
+     */
     public Guest(String id) {
         this.id = id;
     }
 
+    /**
+     * Constructor general
+     * @param id
+     * @param name
+     * @param email
+     * @param phone
+     */
     public Guest(String id, String name, String email, String phone) {
         this.id = id;
         this.name = name;

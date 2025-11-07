@@ -14,7 +14,7 @@ public class Hotel {
 
     @Id
     @Column(name = "id")
-    private int id;
+    private String id;
     @Column(name = "name")
     private String name;
     @Column(name = "address")
@@ -33,7 +33,7 @@ public class Hotel {
      * Constructor identificador
      * @param id
      */
-    public Hotel(int id) {
+    public Hotel(String id) {
         this.id = id;
     }
 
@@ -43,17 +43,17 @@ public class Hotel {
      * @param name
      * @param address
      */
-    public Hotel(int id, String name, String address) {
+    public Hotel(String id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

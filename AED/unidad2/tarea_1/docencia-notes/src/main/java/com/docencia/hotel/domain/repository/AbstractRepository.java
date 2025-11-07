@@ -1,6 +1,5 @@
 package com.docencia.hotel.domain.repository;
 
-import com.docencia.model.Note;
 
 public abstract interface AbstractRepository {
 
@@ -12,19 +11,11 @@ public abstract interface AbstractRepository {
     boolean exists(String id);
 
     /**
-     * Recupera una entidad por un id
-     * @param id
-     * @return
-     */
-    Note findById(String id);
-
-    /**
      * Elimina una entidad por id
      * @param id
      * @return
      */
     boolean delete(String id);
 
-    
 
 }

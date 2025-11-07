@@ -8,6 +8,8 @@ public interface GuestRepository extends AbstractRepository{
 
     Guest find(Guest example);
 
+    Guest findById(String id);
+
     List<Guest> findAll();
 
     Guest save(Guest note);

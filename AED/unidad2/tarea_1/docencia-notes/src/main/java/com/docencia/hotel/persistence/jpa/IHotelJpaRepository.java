@@ -1,7 +1,12 @@
 package com.docencia.hotel.persistence.jpa;
 
-import com.docencia.hotel.domain.repository.HotelRepository;
+import java.util.Optional;
 
-public class IHotelJpaRepository extends AbstractJpaRepository implements HotelRepository{
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.docencia.hotel.model.Hotel;
+
+public interface IHotelJpaRepository extends JpaRepository<Hotel, String>{
+
+    Optional<Hotel> findFirstByTitle(String title);
 }

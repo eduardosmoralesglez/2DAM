@@ -10,6 +10,8 @@ public interface BookingRepository extends AbstractRepository{
 
     Booking find(Booking example);
 
+    Booking findById(String id);
+
     List<Booking> findAll();
 
     Booking save(Booking note);

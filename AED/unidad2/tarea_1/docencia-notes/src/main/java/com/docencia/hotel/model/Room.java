@@ -15,9 +15,9 @@ public class Room {
 
     @Id
     @Column(name = "id")
-    private int id;
+    private String id;
     @Column(name = "number")
-    private int number;
+    private String number;
     @Column(name = "type")
     private String type;
     @Column(name = "price_per_night")
@@ -26,15 +26,29 @@ public class Room {
     @JoinColumn(name = "hotel_id")
     private Hotel Hotel;
 
-
+    /**
+     * Constructor por defecto
+     */
     public Room() {
     }
 
-    public Room(int id) {
+    /**
+     * Constructor identificador
+     * @param id
+     */
+    public Room(String id) {
         this.id = id;
     }
 
-    public Room(int id, int number, String type, double price, Hotel Hotel) {
+    /**
+     * Constructor general
+     * @param id
+     * @param number
+     * @param type
+     * @param price
+     * @param Hotel
+     */
+    public Room(String id, String number, String type, double price, Hotel Hotel) {
         this.id = id;
         this.number = number;
         this.type = type;
@@ -42,19 +56,19 @@ public class Room {
         this.Hotel = Hotel;
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return this.number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

@@ -9,6 +9,8 @@ public interface RoomRepository extends AbstractRepository{
 
     Room find(Room example);
 
+    Room findById(String id);
+
     List<Room> findAll();
 
     Room save(Room note);

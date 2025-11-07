@@ -32,13 +32,28 @@ public class Booking {
     @Column(name = "check_out")
     private LocalDate checkOut;
 
+    /**
+     * Constructor por defecto
+     */
     public Booking() {
     }
 
+    /**
+     * Constructor identificador
+     * @param id
+     */
     public Booking(String id) {
         this.id = id;
     }
 
+    /**
+     * Constructor general
+     * @param id
+     * @param room
+     * @param guest
+     * @param checkIn
+     * @param checkOut
+     */
     public Booking(String id, Room room, Guest guest, LocalDate checkIn, LocalDate checkOut) {
         this.id = id;
         this.room = room;
