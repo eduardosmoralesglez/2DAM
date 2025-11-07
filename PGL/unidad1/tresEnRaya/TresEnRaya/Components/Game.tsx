@@ -1,22 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-// initial state of the tic tac toe board
 const initialBoard = Array(9).fill(null);
 
 const TicTacToeGame = () => {
-  const [board, setBoard] = useState(initialBoard); // board state
-  const [isPlayerTurn, setIsPlayerTurn] = useState(true); // player X's turn
-  const [winner, setWinner] = useState(""); // winner of the game
+  const [board, setBoard] = useState(initialBoard); 
+  const [isPlayerTurn, setIsPlayerTurn] = useState(true);
+  const [winner, setWinner] = useState(""); 
 
-  // check for a winner whenever the board state changes
   useEffect(() => {
     checkWinner();
   }, [board]);
 
-  // check winner
   const checkWinner = () => {
-    // define winning combinations / lines
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -30,33 +26,26 @@ const TicTacToeGame = () => {
 
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
-      // check values is in winning combination are the same and not null
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         setWinner(board[a]);
         return;
       }
     }
 
-    // check for draw if all squares are filled
     if (board.every(square => square)) {
       setWinner("draw");
     }
   };
 
-  // handle square press
   const handleSquarePress = (index: number) => {
-    // check if the square is empty and there is no winner
     if (!board[index] && !winner) {
-      // update the board with the player's move
       const newBoard = [...board];
       newBoard[index] = isPlayerTurn ? 'X' : 'O';
       setBoard(newBoard);
-      // toggle player turn
       setIsPlayerTurn(!isPlayerTurn);
     }
   };
 
-  // game reset
   const handleReset = () => {
     setBoard(initialBoard);
     setIsPlayerTurn(true);
