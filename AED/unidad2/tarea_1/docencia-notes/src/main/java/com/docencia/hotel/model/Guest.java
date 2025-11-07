@@ -11,7 +11,7 @@ public class Guest {
 
     @Column(name = "id")
     private String id;
-    @Column(name = "full_name")
+    @Column(name = "full_name", nullable = false)
     private String name;
     @Column(name = "email")
     private String email;

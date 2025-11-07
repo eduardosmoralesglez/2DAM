@@ -54,7 +54,7 @@ public class BookingJpaRepository implements BookingRepository{
 
     @Override
     public List<Booking> findBookingsInDates(LocalDate date1, LocalDate date2) {
-        
+        return null;
     }
 
     

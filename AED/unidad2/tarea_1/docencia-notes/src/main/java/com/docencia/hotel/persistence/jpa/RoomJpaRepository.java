@@ -54,7 +54,7 @@ public class RoomJpaRepository implements RoomRepository{
 
     @Override
     public List<Room> findRoomsByHotel(Hotel hotel) {
-        
+        return null;
     }
 
    
