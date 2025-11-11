@@ -7,6 +7,7 @@ const TicTacToeGame = () => {
   const [board, setBoard] = useState(initialBoard); 
   const [isPlayerTurn, setIsPlayerTurn] = useState(true);
   const [winner, setWinner] = useState(""); 
+  const [isFinish, setFinish] = useState(false);
 
   useEffect(() => {
     checkWinner();
@@ -28,12 +29,14 @@ const TicTacToeGame = () => {
       const [a, b, c] = lines[i];
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         setWinner(board[a]);
+        setFinish(true);
         return;
       }
     }
 
     if (board.every(square => square)) {
       setWinner("draw");
+      setFinish(true);
     }
   };
 
@@ -50,6 +53,7 @@ const TicTacToeGame = () => {
     setBoard(initialBoard);
     setIsPlayerTurn(true);
     setWinner("");
+    setFinish(false);
   };
 
 
@@ -58,9 +62,10 @@ const TicTacToeGame = () => {
       <View style={styles.board}>
         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(index => (
           <TouchableOpacity
+            key={index}
             style={styles.square}
             onPress={() => handleSquarePress(index)}
-            disabled={board[index] || winner}>
+            disabled= {isFinish}>
             <Text
               style={[
                 styles.squareText,
