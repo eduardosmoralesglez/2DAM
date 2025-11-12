@@ -102,6 +102,7 @@ class ResumePage extends StatelessWidget {
                           height: 1.0,
                         ),
                       ),
+                      
                       const SizedBox(height: 6),
                       Text(
                         'Fotógrafo',
