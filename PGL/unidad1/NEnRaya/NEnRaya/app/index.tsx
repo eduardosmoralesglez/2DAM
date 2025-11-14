@@ -10,7 +10,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <TicTacToeGame></TicTacToeGame>
+     <TicTacToeGame></TicTacToeGame>
     </View>
   );
 }
