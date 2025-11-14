@@ -1,8 +1,8 @@
-C:\Users\Eduardo S\Documents\Repos\2DAM\AED\unidad3\tarea_1\objetos-practica-starter\src\main\java\com\docencia\objetos\config\H2ServerConfig.java
-C:\Users\Eduardo S\Documents\Repos\2DAM\AED\unidad3\tarea_1\objetos-practica-starter\src\main\java\com\docencia\objetos\DemoApplication.java
-C:\Users\Eduardo S\Documents\Repos\2DAM\AED\unidad3\tarea_1\objetos-practica-starter\src\main\java\com\docencia\objetos\domain\Alumno.java
-C:\Users\Eduardo S\Documents\Repos\2DAM\AED\unidad3\tarea_1\objetos-practica-starter\src\main\java\com\docencia\objetos\repo\AlumnoRepository.java
-C:\Users\Eduardo S\Documents\Repos\2DAM\AED\unidad3\tarea_1\objetos-practica-starter\src\main\java\com\docencia\objetos\repo\AlumnoRepositoryJpaAdapter.java
-C:\Users\Eduardo S\Documents\Repos\2DAM\AED\unidad3\tarea_1\objetos-practica-starter\src\main\java\com\docencia\objetos\repo\jpa\AlumnoEntity.java
-C:\Users\Eduardo S\Documents\Repos\2DAM\AED\unidad3\tarea_1\objetos-practica-starter\src\main\java\com\docencia\objetos\repo\jpa\AlumnoJpaRepository.java
-C:\Users\Eduardo S\Documents\Repos\2DAM\AED\unidad3\tarea_1\objetos-practica-starter\src\main\java\com\docencia\objetos\service\AlumnoService.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad3/tarea_1/objetos-practica-starter/src/main/java/com/docencia/objetos/repo/jpa/AlumnoJpaRepository.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad3/tarea_1/objetos-practica-starter/src/main/java/com/docencia/objetos/domain/Alumno.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad3/tarea_1/objetos-practica-starter/src/main/java/com/docencia/objetos/service/AlumnoService.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad3/tarea_1/objetos-practica-starter/src/main/java/com/docencia/objetos/config/H2ServerConfig.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad3/tarea_1/objetos-practica-starter/src/main/java/com/docencia/objetos/repo/jpa/AlumnoEntity.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad3/tarea_1/objetos-practica-starter/src/main/java/com/docencia/objetos/repo/AlumnoRepositoryJpaAdapter.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad3/tarea_1/objetos-practica-starter/src/main/java/com/docencia/objetos/repo/AlumnoRepository.java
+/home/dam/Documentos/Repos/2DAM/AED/unidad3/tarea_1/objetos-practica-starter/src/main/java/com/docencia/objetos/DemoApplication.java

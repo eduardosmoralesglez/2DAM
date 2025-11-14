@@ -26,6 +26,10 @@ public class AlumnoEntity {
   public AlumnoEntity() {
   }
 
+  public AlumnoEntity(Long id) {
+    this.id = id;
+  }
+
   public AlumnoEntity(Long id, String nombre, String email, String ciclo) {
     this.id = id;
     this.nombre = nombre;
