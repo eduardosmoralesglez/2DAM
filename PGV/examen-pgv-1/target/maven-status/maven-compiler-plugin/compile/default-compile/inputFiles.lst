@@ -1,0 +1,10 @@
+/home/dam/Documentos/examen-pgv-1/examen-pgv-1/src/main/java/com/docencia/com/examen/hilos/CarRace.java
+/home/dam/Documentos/examen-pgv-1/examen-pgv-1/src/main/java/com/docencia/com/examen/hilos/CarRaceSemaphore.java
+/home/dam/Documentos/examen-pgv-1/examen-pgv-1/src/main/java/com/docencia/com/examen/procesos/ProcCliApplication.java
+/home/dam/Documentos/examen-pgv-1/examen-pgv-1/src/main/java/com/docencia/com/examen/procesos/controllers/CliController.java
+/home/dam/Documentos/examen-pgv-1/examen-pgv-1/src/main/java/com/docencia/com/examen/procesos/domain/Job.java
+/home/dam/Documentos/examen-pgv-1/examen-pgv-1/src/main/java/com/docencia/com/examen/procesos/repositories/file/FileJobRepository.java
+/home/dam/Documentos/examen-pgv-1/examen-pgv-1/src/main/java/com/docencia/com/examen/procesos/repositories/interfaces/JobRepository.java
+/home/dam/Documentos/examen-pgv-1/examen-pgv-1/src/main/java/com/docencia/com/examen/procesos/services/impl/DfServiceImpl.java
+/home/dam/Documentos/examen-pgv-1/examen-pgv-1/src/main/java/com/docencia/com/examen/procesos/services/impl/abstracts/CommandServiceAbstract.java
+/home/dam/Documentos/examen-pgv-1/examen-pgv-1/src/main/java/com/docencia/com/examen/procesos/services/interfaces/CommandService.java
