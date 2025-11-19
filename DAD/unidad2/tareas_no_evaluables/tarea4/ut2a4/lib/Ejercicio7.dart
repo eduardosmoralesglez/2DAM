@@ -12,14 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.pink,
-          brightness: Brightness.light,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all(Colors.red),
-            foregroundColor: WidgetStateProperty.all(Colors.white),
-          )
+          seedColor: Colors.blue,
+          brightness: Brightness.dark,
         ),
       ),
       home: HomePage(),
@@ -35,7 +29,20 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(onPressed: () {}, child: Text("Hola"))
+            Text("Hola"),
+            Icon(Icons.star),
+            ElevatedButton(onPressed: () {}, child: Text("Botón")),
+            Theme(
+              data: Theme.of(context).copyWith(
+                elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+              ),
+              child: ElevatedButton(onPressed: () {}, child: Text("Hola")),
+            ),
           ],
         ),
       ),

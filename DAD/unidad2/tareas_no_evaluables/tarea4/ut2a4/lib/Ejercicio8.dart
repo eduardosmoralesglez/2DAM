@@ -15,12 +15,18 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.pink,
           brightness: Brightness.light,
         ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all(Colors.red),
-            foregroundColor: WidgetStateProperty.all(Colors.white),
-          )
-        ),
+        textTheme: TextTheme(
+          headlineMedium: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.pinkAccent
+          ),
+          bodyLarge: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.normal,
+            color: Colors.blue,
+          ),
+        )
       ),
       home: HomePage(),
     );
@@ -35,7 +41,9 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(onPressed: () {}, child: Text("Hola"))
+            Text("HeadLineMedium", style: Theme.of(context).textTheme.headlineMedium),
+            Text("BodyLarge", style: Theme.of(context).textTheme.bodyLarge),
+            
           ],
         ),
       ),
