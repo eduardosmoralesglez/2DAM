@@ -1,3 +1,0 @@
-4 7 1 Leonardo
-3 10 2 Picasso
-5 5 1 Monet
