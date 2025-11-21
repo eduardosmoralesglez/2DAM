@@ -1,7 +1,6 @@
 package com.docencia.personas.model;
 
 import org.springframework.data.mongodb.core.mapping.Field;
-import java.util.Objects;
 
 public class Direccion {
 
