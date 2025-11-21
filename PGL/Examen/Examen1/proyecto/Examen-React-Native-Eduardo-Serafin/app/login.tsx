@@ -19,10 +19,6 @@ export default function Login() {
     }
   };
 
-  const handlePassword = (password : String) => {
-    
-  }
-
   return (
     <View style={{ flex: 1, justifyContent: "center", padding: 20 }}>
       <TextInput

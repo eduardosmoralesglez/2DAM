@@ -1,14 +1,17 @@
+
+import { router } from "expo-router";
 import React from "react";
-import { View } from "react-native";
+import { Button, TextInput, View } from "react-native";
 
 
-export default function groups() {
+export default function Groups() {
 
-    return (
-        <View>
-            
-        </View>
-    )
+  return (
+    <View style={{ flex: 1, justifyContent: "center", padding: 20 }}>
+      
+      <Button title="Registrarse" onPress={() => router.push("/register")} />
+    </View>
+  );
 
     
 }
