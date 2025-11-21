@@ -55,14 +55,17 @@ public class PersonaRepositoryTest {
 
     @Test
     void testFindByEdadBetween() {
-        Persona persona35 = new Persona("Persona35", 35, email, direccion);
-        Persona persona42 = new Persona("Persona42", 42, email, direccion);
+        Persona persona35 = new Persona("test35", 35, email, direccion);
+        Persona persona42 = new Persona("test42", 42, email, direccion);
         personaRepository.save(persona35);
         personaRepository.save(persona42);
         List<Persona> list1020 = personaRepository.findByEdadBetween(10, 20);
         Assertions.assertEquals(1, list1020.size());
+        Assertions.assertEquals(list1020.get(0), personaFind);
         List<Persona> list2050 = personaRepository.findByEdadBetween(20, 50);
         Assertions.assertEquals(2, list2050.size());
+        Assertions.assertEquals(list2050.get(0), persona35);
+        Assertions.assertEquals(list2050.get(1), persona42);
     }
 
     @Test
