@@ -1,0 +1,64 @@
+# Generated .gitignore file for: Java, JavaScript, TypeScript, PHP, Python, VSCode, Windows, Linux
+# Created with FOSSA's DevOps Tools
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+.mtj.tmp/
+hs_err_pid*
+target/
+build/
+
+# JavaScript
+# Add JavaScript-specific ignores here
+
+# TypeScript
+# Add TypeScript-specific ignores here
+
+# PHP
+# Add PHP-specific ignores here
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+venv/
+env/
+.env
+*.so
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Windows
+# Add Windows-specific ignores here
+
+# Linux
+# Add Linux-specific ignores here
+
+# Common
+.DS_Store
+Thumbs.db
+*.log
+*.bak
+*.tmp
+*.swp
+*~
+
+# IDE and editor generated files
+.idea/
+*.sublime-*
+
+# Local environment files
+.env
+.env.local
+.env.*.local
