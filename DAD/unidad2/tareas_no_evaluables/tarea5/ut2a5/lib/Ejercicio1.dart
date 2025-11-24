@@ -9,16 +9,11 @@ class MyApp extends StatefulWidget {
 
   @override
   State createState() => _MyAppState();
+
 }
 
 class _MyAppState extends State<MyApp> {
   bool _isDark = false;
-
-  void toggleTheme() {
-    setState(() {
-      _isDark = !_isDark;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,30 +32,22 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       themeMode: _isDark ? ThemeMode.dark : ThemeMode.light,
-      home: HomePage(isDark: _isDark, toggleTheme: toggleTheme),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  final bool isDark;
-  final VoidCallback toggleTheme;
-
-  const HomePage({super.key, required this.isDark, required this.toggleTheme});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: toggleTheme,
-          child: Text(isDark ? "Cambiar a claro" : "Cambiar a oscuro"),
+      home: Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _isDark = !_isDark;
+              });
+            },
+            child: Text(_isDark ? "Cambiar a claro" : "Cambiar a oscuro"),
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: isDark ? Icon(Icons.light_mode) : Icon(Icons.dark_mode),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: _isDark ? Icon(Icons.light_mode) : Icon(Icons.dark_mode),
+        ),
       ),
     );
   }
