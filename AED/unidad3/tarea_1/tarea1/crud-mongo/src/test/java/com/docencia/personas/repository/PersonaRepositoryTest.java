@@ -1,4 +1,4 @@
-package com.docencia.personas;
+package com.docencia.personas.repository;
 
 import com.docencia.personas.model.Direccion;
 import com.docencia.personas.model.Persona;
