@@ -17,6 +17,7 @@ import com.docencia.rest.services.interfaces.UserServiceInterface;
 public class UserService implements UserServiceInterface {
 
     private UserRepository userRepository;
+    
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
