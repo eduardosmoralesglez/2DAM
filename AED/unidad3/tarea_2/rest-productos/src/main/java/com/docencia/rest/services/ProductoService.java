@@ -16,8 +16,8 @@ public class ProductoService implements ProductoServiceInterface {
     private ProductoRepository productoRepository;
 
     @Autowired
-    public ProductoRepository getProductoRepository() {
-        return productoRepository;
+    public void setProductoRepository(ProductoRepository productoRepository) {
+        this.productoRepository = productoRepository;
     }
 
     @Override
