@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeNotifier(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
-class ThemeNotifier extends ChangeNotifier {
-  bool _isDark = false;
-  bool get isDark => _isDark;
-
-  void toggleTheme() {
-    _isDark = !_isDark;
-    notifyListeners();
-  }
-}
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _isDark = false;
+
+  void toggleTheme() {
+    setState(() {
+      _isDark = !_isDark;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final isDark = context.watch<ThemeNotifier>().isDark;
     return MaterialApp(
       title: "Tema claro/oscuro",
       theme: ThemeData(
@@ -40,22 +36,20 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-      routes: {
-        '/': (_) => const HomePage(),
-        '/pantalla2': (_) => const Pantalla2(),
-      },
+      themeMode: _isDark ? ThemeMode.dark : ThemeMode.light,
+      home: HomePage(isDark: _isDark, toggleTheme: toggleTheme),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final bool isDark;
+  final VoidCallback toggleTheme;
+
+  const HomePage({super.key, required this.isDark, required this.toggleTheme});
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = context.watch<ThemeNotifier>().isDark;
-    final VoidCallback toggleTheme = context.watch<ThemeNotifier>().toggleTheme;
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -68,10 +62,17 @@ class HomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/pantalla2');
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context) => Pagina2(
+                      isDark: isDark,
+                      toggleTheme: toggleTheme
+                      )
+                  )
+                );
               },
-              child: Text("Ir a paguina 2"),
-            ),
+              child: Text("Ir a paguina 2"))
           ],
         ),
       ),
@@ -83,14 +84,14 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class Pantalla2 extends StatelessWidget {
-  const Pantalla2({super.key});
+class Pagina2 extends StatelessWidget{
+  final bool isDark;
+  final VoidCallback toggleTheme;
 
+  const Pagina2({super.key, required this.isDark, required this.toggleTheme});
+  
   @override
   Widget build(BuildContext context) {
-    final bool isDark = context.watch<ThemeNotifier>().isDark;
-    final VoidCallback toggleTheme = context.watch<ThemeNotifier>().toggleTheme;
-
     return Scaffold(
       appBar: AppBar(),
       body: Center(

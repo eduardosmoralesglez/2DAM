@@ -41,10 +41,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-      routes: {
-        '/': (_) => const HomePage(),
-        '/pantalla2': (_) => const Pantalla2(),
-      },
+      home: HomePage(),
     );
   }
 }
@@ -68,7 +65,10 @@ class HomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/pantalla2');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Pagina2()),
+                );
               },
               child: Text("Ir a paguina 2"),
             ),
@@ -83,8 +83,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class Pantalla2 extends StatelessWidget {
-  const Pantalla2({super.key});
+class Pagina2 extends StatelessWidget {
+  const Pagina2({super.key});
 
   @override
   Widget build(BuildContext context) {
