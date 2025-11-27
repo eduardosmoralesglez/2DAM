@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "productos")
-public class Producto {
+public class ProductoEntity {
     private int id;
 
     @Column(name = "nombre")
@@ -25,14 +25,14 @@ public class Producto {
     /**
      * Constructor por defecto
      */
-    public Producto() {
+    public ProductoEntity() {
     }
     
     /**
      * Constructor identificador
      * @param id
      */
-    public Producto(int id) {
+    public ProductoEntity(int id) {
         this.id = id;
     }
 
@@ -43,7 +43,7 @@ public class Producto {
      * @param precio
      * @param stock
      */
-    public Producto(int id, String nombre, BigDecimal precio, int stock) {
+    public ProductoEntity(int id, String nombre, BigDecimal precio, int stock) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -88,10 +88,10 @@ public class Producto {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Producto)) {
+        if (!(o instanceof ProductoEntity)) {
             return false;
         }
-        Producto producto = (Producto) o;
+        ProductoEntity producto = (ProductoEntity) o;
         return Objects.equals(id, producto.id);
     }
 

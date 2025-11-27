@@ -14,10 +14,12 @@ import com.docencia.rest.services.interfaces.UserServiceInterface;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.responses.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/usuarios")
+@Tag(name = "Usuarios", description = "Operaciones sobre usuarios")
 public class UsersController {
 
     private UserServiceInterface userService;
