@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +17,9 @@ class EscapeRoomApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (_) => const SalaInicial(),
-        // Añade aquí las rutas que faltan
+        '/prueba': (_) => const Pista1(),
+        '/error': (_) => const Atrapado(),
+        
       },
     );
   }
@@ -26,6 +30,42 @@ class EscapeRoomApp extends StatelessWidget {
 // - Pista1
 // - Victoria
 // - Atrapado
+
+
+
+class PreguntasWidget extends StatelessWidget {
+  final String pregunta;
+  final Map<String, bool> opciones;
+
+  const PreguntasWidget({
+    super.key,
+    required this.pregunta, 
+    required this.opciones,
+
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          Column(
+            children: [
+              Text(pregunta),
+              Column(children: [
+                ...opciones.entries.map((entry) {
+                  return ElevatedButton(onPressed: () { 
+                    entry.value ? Navigator.pushNamed(context, "/prueba") : Navigator.pushNamed(context, "/error");
+                   }, child: Text(entry.key,),);
+                } as Function(MapEntry<String, bool> e)).toList(),
+              ]),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class SalaInicial extends StatelessWidget {
   const SalaInicial({super.key});
@@ -41,14 +81,14 @@ class SalaInicial extends StatelessWidget {
               children: [
                 Text("Estás en una sala secreta de Hogwart."),
                 Text("data2"),
-                Text("pregunta"),
-                Column(
-                  children: [
-                    ElevatedButton(onPressed: () {}, child: Text("opcion1")),
-                    ElevatedButton(onPressed: () {}, child: Text("opcion2")),
-                    ElevatedButton(onPressed: () {}, child: Text("opcion3")),
-                    ElevatedButton(onPressed: () {}, child: Text("opcion4")),
-                  ],
+                PreguntasWidget(
+                  pregunta: '¿Cuál es la casa a la que pertenece Harry Potter?', 
+                  opciones: {
+                    'Hufflepuf' : false,
+                    'Gryffindor' : true,
+                    'Slytherin' : false,
+                    'Ravenclaw' :false
+                  },
                 ),
               ],
             ),
