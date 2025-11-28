@@ -17,7 +17,7 @@ class EscapeRoomApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (_) => const SalaInicial(),
-        '/prueba': (_) => const Pista1(),
+        '/pista1': (_) => const Pista1(),
         '/error': (_) => const Atrapado(),
         
       },
