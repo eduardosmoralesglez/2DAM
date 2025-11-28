@@ -30,12 +30,14 @@ public class Producto {
      * @param nombre
      * @param precio
      * @param stock
+     * @param detalleProducto
      */
-    public Producto(int id, String nombre, BigDecimal precio, int stock) {
+    public Producto(int id, String nombre, BigDecimal precio, int stock, DetalleProducto detalleProducto) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
+        this.detalleProducto = detalleProducto;
     }
 
     public int getId() {
@@ -70,6 +72,14 @@ public class Producto {
         this.stock = stock;
     }
 
+    public DetalleProducto getDetalleProducto() {
+        return this.detalleProducto;
+    }
+
+    public void setDetalleProducto(DetalleProducto detalleProducto) {
+        this.detalleProducto = detalleProducto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -84,6 +94,17 @@ public class Producto {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", nombre='" + getNombre() + "'" +
+            ", precio='" + getPrecio() + "'" +
+            ", stock='" + getStock() + "'" +
+            ", detalleProducto='" + getDetalleProducto() + "'" +
+            "}";
     }
 
 }
