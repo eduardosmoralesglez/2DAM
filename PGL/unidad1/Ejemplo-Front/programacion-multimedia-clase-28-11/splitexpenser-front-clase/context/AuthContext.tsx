@@ -2,7 +2,7 @@ import * as SecureStore from "expo-secure-store";
 import Constants from "expo-constants";
 import React, { createContext, useEffect, useMemo, useState } from "react";
 
-const API_URL = Constants.expoConfig?.extra?.apiUrl ?? "";
+const API_URL = Constants.expoConfig?.extra?.apiUrl ?? "10.108.21.0:8001";
 const TOKEN_KEY = Constants.expoConfig?.extra?.tokenKey ?? "";
 
 type AuthContextType = {
@@ -11,6 +11,7 @@ type AuthContextType = {
   login: (username: string, password: string) => Promise<any>;
   register: (username: string, password: string) => Promise<any>;
   logout: () => Promise<void>;
+  unregister: () => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -18,7 +19,8 @@ export const AuthContext = createContext<AuthContextType>({
   loading: true,
   login: async () => ({}),
   register: async () => ({}),
-  logout: async () => {},
+  logout: async () => { },
+  unregister: async () => { },
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
