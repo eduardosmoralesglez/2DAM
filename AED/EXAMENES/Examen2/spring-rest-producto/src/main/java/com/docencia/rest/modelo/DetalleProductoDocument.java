@@ -1,13 +1,15 @@
-package com.docencia.rest.domain;
+package com.docencia.rest.modelo;
 
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Objects;
 
-
-public class DetalleProducto {
-    
+@Document(collection = "producto_detalle")
+public class DetalleProductoDocument {
+    @Id
     private int id;
     private int productoId;
     private String descripcionLarga;
@@ -15,10 +17,11 @@ public class DetalleProducto {
     private List<String> tags;
 
 
-    public DetalleProducto() {
+
+    public DetalleProductoDocument() {
     }
 
-    public DetalleProducto(int id, int productoId, String descripcionLarga, Map<String,String> especificacionesTecnicas, List<String> tags) {
+    public DetalleProductoDocument(int id, int productoId, String descripcionLarga, Map<String,String> especificacionesTecnicas, List<String> tags) {
         this.id = id;
         this.productoId = productoId;
         this.descripcionLarga = descripcionLarga;
@@ -66,40 +69,16 @@ public class DetalleProducto {
         this.tags = tags;
     }
 
-    public DetalleProducto id(int id) {
-        setId(id);
-        return this;
-    }
-
-    public DetalleProducto productoId(int productoId) {
-        setProductoId(productoId);
-        return this;
-    }
-
-    public DetalleProducto descripcionLarga(String descripcionLarga) {
-        setDescripcionLarga(descripcionLarga);
-        return this;
-    }
-
-    public DetalleProducto especificacionesTecnicas(Map<String,String> especificacionesTecnicas) {
-        setEspecificacionesTecnicas(especificacionesTecnicas);
-        return this;
-    }
-
-    public DetalleProducto tags(List<String> tags) {
-        setTags(tags);
-        return this;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof DetalleProducto)) {
+        if (!(o instanceof DetalleProductoDocument)) {
             return false;
         }
-        DetalleProducto detalleProducto = (DetalleProducto) o;
-        return id == detalleProducto.id;
+        DetalleProductoDocument detalleProductoDocument = (DetalleProductoDocument) o;
+        return id == detalleProductoDocument.id;
     }
 
     @Override
