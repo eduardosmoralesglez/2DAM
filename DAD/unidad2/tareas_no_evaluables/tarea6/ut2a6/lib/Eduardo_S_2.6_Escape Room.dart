@@ -83,6 +83,7 @@ class SalaInicial extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Escape Room')),
+      
       body: Center(
         child: Column(
           children: [
