@@ -1,19 +1,27 @@
 # -*- coding: utf-8 -*-
 
-# from odoo import models, fields, api
+from odoo import models, fields, api
 
+# Definimos el modelo de datos
+class ListaTareas(models.Model):
+    # Nombre y descripción del modelo de datos
+    _name = 'lista_tareas.lista_tareas'
+    _description = 'Lista de tareas'
 
-# class lista_tareas(models.Model):
-#     _name = 'lista_tareas.lista_tareas'
-#     _description = 'lista_tareas.lista_tareas'
+    # Elementos de cada fila del modelo de datos
+    tarea = fields.Char(string='Tarea')
+    prioridad = fields.Integer(string='Prioridad')
+    urgente = fields.Boolean(
+        string='Urgente',
+        compute='_value_urgente',
+        store=True
+    )
+    realizada = fields.Boolean(string='Realizada')
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
-
+    # Este cómputo depende de la variable prioridad
+    @api.depends('prioridad')
+    def _value_urgente(self):
+        # Para cada registro
+        for record in self:
+            # Si la prioridad es mayor que 10, se considera urgente
+            record.urgente = record.prioridad > 10
