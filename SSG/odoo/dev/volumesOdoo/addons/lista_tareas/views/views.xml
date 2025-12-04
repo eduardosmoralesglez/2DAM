@@ -10,6 +10,7 @@
       <field name="tarea"/>
       <field name="prioridad"/>
       <field name="urgente"/>
+      <field name="asignado_a"/>
       <field name="realizada"/>
     </tree>
   </field>

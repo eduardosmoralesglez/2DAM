@@ -16,6 +16,7 @@ class ListaTareas(models.Model):
         compute='_value_urgente',
         store=True
     )
+    asignado_a = fields.Many2one("res.users",string='Persona asignada', default= lambda self:self.env.user,required= True)
     realizada = fields.Boolean(string='Realizada')
 
     # Este cómputo depende de la variable prioridad
@@ -25,3 +26,4 @@ class ListaTareas(models.Model):
         for record in self:
             # Si la prioridad es mayor que 10, se considera urgente
             record.urgente = record.prioridad > 10
+    
