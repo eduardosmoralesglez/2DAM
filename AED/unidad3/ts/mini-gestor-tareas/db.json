@@ -1,0 +1,6 @@
+{
+  "tareas": [
+    { "id": 1, "titulo": "Estudiar TypeScript", "descripcion": "Repasar tipos y funciones", "completada": false },
+    { "id": 2, "titulo": "Hacer la práctica 1", "descripcion": "Proyecto tareas en memoria", "completada": true }
+  ]
+}
