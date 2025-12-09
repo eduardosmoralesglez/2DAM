@@ -23,7 +23,6 @@ public class TareaRestController {
         return tareaService.listarTodas();
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Tarea> buscarPorId(@PathVariable Long id) {
         Tarea tarea = tareaService.buscarPorId(id);
@@ -33,8 +32,11 @@ public class TareaRestController {
         return ResponseEntity.ok(tarea);
     }
 
-    public record CrearTareaRequest(String titulo, String descripcion) {}
-    public record ActualizarTareaRequest(String titulo, String descripcion, Boolean completada) {}
+    public record CrearTareaRequest(String titulo, String descripcion) {
+    }
+
+    public record ActualizarTareaRequest(String titulo, String descripcion, Boolean completada) {
+    }
 
     @PostMapping
     public ResponseEntity<Tarea> crear(@RequestBody CrearTareaRequest request) {
@@ -48,11 +50,10 @@ public class TareaRestController {
     @PutMapping("/{id}")
     public ResponseEntity<Tarea> actualizar(@PathVariable Long id, @RequestBody ActualizarTareaRequest request) {
         Tarea actualizada = tareaService.actualizarTarea(
-            id,
-            request.titulo(),
-            request.descripcion(),
-            request.completada()
-        );
+                id,
+                request.titulo(),
+                request.descripcion(),
+                request.completada());
         if (actualizada == null) {
             return ResponseEntity.notFound().build();
         }
@@ -68,4 +69,3 @@ public class TareaRestController {
         return ResponseEntity.noContent().build();
     }
 }
-
