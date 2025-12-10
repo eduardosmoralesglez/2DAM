@@ -49,7 +49,10 @@ class MyMainWidget extends StatelessWidget {
                 Padding(
                   padding: EdgeInsetsGeometry.all(25),
                   child: Row(
+                    // Se hace con lo siguiente
+                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      //Los sizedBox sobran
                       SizedBox(width: 255,),
                       Icon(Icons.email),
                       SizedBox(width: 255,),
@@ -63,10 +66,12 @@ class MyMainWidget extends StatelessWidget {
                 ),
                 Column(
                   children: [
+                    // Se usa ElevatedButton.icon
                     ElevatedButton(
                       onPressed: () {},
                       style: ButtonStyle(
                       ),
+                      // Mala estructura usar un Row en el boton
                       child: Row(
                         children: [
                           Icon(Icons.save),
