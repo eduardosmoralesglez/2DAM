@@ -16,6 +16,8 @@ class ListaTareas(models.Model):
         compute='_value_urgente',
         store=True
     )
+    
+    # Usuario asignado y si esta realizada
     asignado_a = fields.Many2one("res.users",string='Persona asignada', default= lambda self:self.env.user,required= True)
     realizada = fields.Boolean(string='Realizada')
 
