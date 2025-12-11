@@ -2,6 +2,24 @@
   <data>
 <!-- explicit list view definition -->
 <!-- Definimos como es la vista explicita de la litas-->
+<record id="lista_tarea_form_view" model="ir.ui.view">
+  <field name="name">lista_tareas form</field>
+  <field name="model">lista_tareas.lista_tareas</field>
+  <field name="arch" type="xml">
+    <form string="views">
+      <sheet>
+        <group>
+          <field name="tarea"/>
+          <field name="prioridad"/>
+          <field name="urgente"/>
+          <field name="asignado_a"/>
+          <field name="realizada"/>
+        </group>
+      </sheet>
+    </form>
+  </field>
+</record>
+
 <record model="ir.ui.view" id="lista_tareas.list">
   <field name="name">lista_tareas list</field>
   <field name="model">lista_tareas.lista_tareas</field>
@@ -16,23 +34,6 @@
   </field>
 </record>
 
-<record id="lista_tarea.list" model="ir.ui.view">
-  <field name="name">lista_tarea.list</field>
-  <field name="model">lista_tareas.lista_tareas</field>
-  <field name="arch" type="xml">
-    <form string="">
-      <sheet>
-        <group>
-          <field name="tarea"/>
-          <field name="prioridad"/>
-          <field name="urgente"/>
-          <field name="asignado_a"/>
-          <field name="realizada"/>
-        </group>
-      </sheet>
-    </form>
-  </field>
-</record>
 <!-- actions opening views on models -->
 <!-- Acciones al abrir las vistas en los modelos
 https://www.odoo.com/documentation/17.0/developer/reference/addons/actions.html
