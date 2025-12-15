@@ -43,8 +43,6 @@ public class ProductoController {
         return productoService.findAll();
     }
 
-
-
     @Operation(summary = "Get user by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
