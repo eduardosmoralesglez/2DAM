@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import com.docencia.tareas.model.Tarea;
 import com.docencia.tareas.service.TareaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/api/tareas")
 public class TareaRestController {
@@ -17,6 +21,7 @@ public class TareaRestController {
     public TareaRestController(TareaService tareaService) {
         this.tareaService = tareaService;
     }
+
 
     @GetMapping
     public List<Tarea> listarTodas() {
