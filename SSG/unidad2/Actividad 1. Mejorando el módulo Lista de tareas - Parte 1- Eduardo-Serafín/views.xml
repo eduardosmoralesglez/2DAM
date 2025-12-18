@@ -14,9 +14,6 @@
           <field name="urgente"/>
           <field name="asignado_a"/>
           <field name="realizada"/>
-          <field name="fecha_limite"/>
-          <field name="fecha_creacion" />
-          <field name="retrasada"/>
         </group>
       </sheet>
     </form>
@@ -33,9 +30,6 @@
       <field name="urgente"/>
       <field name="asignado_a"/>
       <field name="realizada"/>
-      <field name="fecha_limite"/>
-      <field name="retrasada"/>
-      <field name="fecha_creacion" />
     </tree>
   </field>
 </record>
