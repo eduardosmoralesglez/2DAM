@@ -27,8 +27,7 @@ class ListaTareas(models.Model):
     fecha_creacion = fields.Date(string='Fecha creacion', default=fields.Date.today())
     retrasada = fields.Boolean(
         string='Retrasada',
-        compute='_tarea_retrasada',
-        store=True
+        compute='_tarea_retrasada'
     )
 
     # Este cómputo depende de la variable prioridad
@@ -39,10 +38,10 @@ class ListaTareas(models.Model):
             # Si la prioridad es mayor que 10, se considera urgente
             record.urgente = record.prioridad > 10
     
-    @api.depends('fecha_limite', 'realizada')
+    @api.depends('fecha_limite')
     def _tarea_retrasada(self):
         # Para cada registro
         for record in self:
-            if record.fecha_limite < fields.Date.today() and record.realizada:
-                record.retrasada = True
+            record.retrasada = record.fecha_limite < fields.Date.today() and record.realizada:
+                 
             
