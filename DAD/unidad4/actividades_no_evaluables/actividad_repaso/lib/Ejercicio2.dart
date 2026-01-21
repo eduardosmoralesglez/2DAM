@@ -49,12 +49,12 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 20),
 
             ElevatedButton(
-              onPressed: () => context.read<MoodModel>().feliz(),
+              onPressed: () => model.feliz(),
               child: const Text('Feliz'),
             ),
 
             ElevatedButton(
-              onPressed: () => context.read<MoodModel>().enfadado(),
+              onPressed: () => model.enfadado(),
               child: const Text('Enfadado'),
             ),
           ],

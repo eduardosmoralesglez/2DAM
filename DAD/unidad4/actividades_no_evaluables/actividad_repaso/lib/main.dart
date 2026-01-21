@@ -1,112 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(const ComidaApp());
+void main() => runApp(const App());
 
-class ComidaApp extends StatelessWidget {
-  const ComidaApp({super.key});
+/// PROVIDER MÁS SIMPLE POSIBLE
+class MoodModel extends ChangeNotifier {
+  String emoji = '😄';
+
+  void feliz() {
+    emoji = '😄';
+    notifyListeners();
+  }
+
+  void enfadado() {
+    emoji = '😡';
+    notifyListeners();
+  }
+
+}
+
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Rutas sencillas',
-      initialRoute: '/',
-      routes: {
-        '/': (_) => const InicioPage(),
-        '/pizza': (_) => const PizzaPage(),
-        '/brocoli': (_) => const BrocoliPage()
-      },
+    return ChangeNotifierProvider(
+      create: (context) => MoodModel(),
+      child: const MaterialApp(home: HomePage()),
     );
   }
 }
 
-// ------------------ INICIO ------------------
-
-class InicioPage extends StatelessWidget {
-  const InicioPage({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<MoodModel>();
     return Scaffold(
-      appBar: AppBar(title: const Text('¿Qué prefieres?')),
+      appBar: AppBar(title: const Text('Mini Provider')),
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Practica navegación por rutas',
-              style: TextStyle(fontSize: 18),
-            ),
+            Text(model.emoji, style: const TextStyle(fontSize: 80)),
 
             const SizedBox(height: 20),
 
             ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, "/pizza"),
-              child: const Text('🍕 Pizza'),
+              onPressed: () => model.feliz(),
+              child: const Text('Feliz'),
             ),
 
-            const SizedBox(height: 12),
-
             ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, "/brocoli"),
-              child: const Text('🥦 Brócoli'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// ------------------ PIZZA ------------------
-
-class PizzaPage extends StatelessWidget {
-  const PizzaPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Pizza')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('🍕', style: TextStyle(fontSize: 80)),
-            const SizedBox(height: 10),
-            const Text('La pizza nunca falla', style: TextStyle(fontSize: 20)),
-            const SizedBox(height: 20),
-
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Volver'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// ------------------ BRÓCOLI ------------------
-
-class BrocoliPage extends StatelessWidget {
-  const BrocoliPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Brócoli')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('🥦', style: TextStyle(fontSize: 80)),
-            const SizedBox(height: 10),
-            const Text('Modo vida sana ON', style: TextStyle(fontSize: 20)),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Volver'),
+              onPressed: () => model.enfadado(),
+              child: const Text('Enfadado'),
             ),
           ],
         ),
