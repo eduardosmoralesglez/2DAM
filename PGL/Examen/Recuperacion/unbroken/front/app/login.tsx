@@ -17,10 +17,16 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [mode, setMode] = useState<"login" | "register">("login");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleAuth = async () => {
     if (!alias || !password) {
       Alert.alert("Error", "Completa alias y contraseña");
+      return;
+    }
+    setError("");
+    if (!validarPassword(password).esValida) {
+      setError(validarPassword(password).errores[0])
       return;
     }
     setLoading(true);
@@ -38,6 +44,36 @@ export default function LoginScreen() {
     }
   };
 
+interface ValidacionPassword {
+  esValida: boolean;
+  errores: string[];
+}
+
+function validarPassword(password: string): ValidacionPassword {
+  const errores: string[] = [];
+  
+  if (password.length < 6) {
+    errores.push("Mínimo 6 caracteres");
+  }
+  if (!/[A-Z]/.test(password)) {
+    errores.push("Falta una mayúscula");
+  }
+  if (!/[a-z]/.test(password)) {
+    errores.push("Falta una minúscula");
+  }
+  if (!/[0-9]/.test(password)) {
+    errores.push("Falta un número");
+  }
+  if (!/[!#$%&?]/.test(password)) {
+    errores.push("Falta un símbolo (!#$%&?)");
+  }
+
+  return {
+    esValida: errores.length === 0,
+    errores: errores
+  };
+}
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -46,17 +82,20 @@ export default function LoginScreen() {
       <TextInput
         placeholder="Alias"
         value={alias}
-        onChangeText={(e) => setAlias(e.target?.value)}
+        onChangeText={setAlias}
         style={styles.input}
         autoCapitalize="none"
       />
       <TextInput
         placeholder="Contraseña"
         value={password}
-        onChangeText={(e) => setPassword(e.target?.value)}
+        onChangeText={setPassword}
         style={styles.input}
         secureTextEntry
       />
+
+      {error ? <Text style={{ color: "red" }}>{error}</Text> : null}
+
       {loading ? (
         <ActivityIndicator size="large" color="#0066cc" />
       ) : (

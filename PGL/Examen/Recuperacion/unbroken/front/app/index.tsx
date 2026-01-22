@@ -26,7 +26,7 @@ export default function HabitListScreen() {
   const fetchHabits = async () => {
     try {
       const data = await listHabits();
-      habits.push(...data);
+      setHabits(data);
     } catch (e: any) {
       if (e.message?.includes("401") || e.message?.includes("Unauthorized")) {
         router.replace("/login");

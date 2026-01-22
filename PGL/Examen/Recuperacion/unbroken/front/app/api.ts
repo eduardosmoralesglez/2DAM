@@ -1,27 +1,27 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const API_BASE = "https://127.0.0.1:5555/";
+const API_BASE = "http://10.0.2.2:5000";
 
 export async function setToken(token: string): Promise<void> {
-  await AsyncStorage.setItem("authToken", token);
+  await AsyncStorage.setItem("access_token", token);
 }
 
 export async function getToken(): Promise<string | null> {
-  return await AsyncStorage.getItem("authToken");
+  return await AsyncStorage.getItem("access_token");
 }
 
 export async function clearToken(): Promise<void> {
-  await AsyncStorage.removeItem("authToken");
+  await AsyncStorage.removeItem("access_token");
 }
 
-async function authHeaders(): HeadersInit {
+async function authHeaders(): Promise<HeadersInit> {
   const token = getToken();
-  return token
+  return await token
     ? {
         "Content-Type": "application/json",
       }
     : {
-        Auth: `Bearer${token}`,
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
       };
 }
@@ -43,17 +43,18 @@ async function apiRequest<T>(
 export async function registerUser(alias: string, password: string) {
   return apiRequest<{ msg: string }>(`/auth/register`, {
     method: "POST",
-    json: JSON.stringify({ alias: alias, pw: password }),
+    body: JSON.stringify({ alias: alias, password: password }),
   });
 }
 
 export async function loginUser(alias: string, password: string) {
   const data = await apiRequest<{ access_token: string }>(`/auth/login`, {
     method: "POST",
-    json: JSON.stringify({ alias: alias, pw: password }),
+    body: JSON.stringify({ alias: alias, password: password }),
   });
-  await setToken(data.access_token);
-  return data.access_token;
+  setToken(data.access_token);
+  console.log(data)
+  return data;
 }
 
 export type Habit = {
@@ -69,13 +70,15 @@ export type Habit = {
 };
 
 export async function listHabits(): Promise<Record<string, Habit>> {
-  return apiRequest<Record<string, Habit>>(`/habits/`);
+  return apiRequest<Record<string, Habit>>(`/habits/`, {
+    method: "GET",
+  });
 }
 
 export async function createHabit(description: string): Promise<Habit> {
   return apiRequest<Habit>(`/habits/`, {
     method: "POST",
-    json: JSON.stringify({ desc: description }),
+    body: JSON.stringify({ description: description }),
   });
 }
 
@@ -85,7 +88,7 @@ export async function editHabit(
 ): Promise<Habit> {
   return apiRequest<Habit>(`/habits/${habitId}`, {
     method: "PUT",
-    json: JSON.stringify({ desc: description }),
+    body: JSON.stringify({ description: description }),
   });
 }
 

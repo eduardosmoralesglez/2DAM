@@ -110,7 +110,7 @@ export default function HabitDetailScreen() {
 
   const today = new Date().toISOString().slice(0, 10);
 
-  const todayLog = habit.last_check_date == today;
+  const todayLog = habit.last_check_date === today;
   const fireColor = todayLog ? "#e25822" : "#cccccc";
 
   return (
