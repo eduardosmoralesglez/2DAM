@@ -1,0 +1,17 @@
+<section class="card">
+  <h2>Lista de Libros</h2>
+
+  @if (booksService.list().length === 0) {
+    <p>No hay libros todavía.</p>
+  } @else {
+    <ul class="list">
+      @for (t of booksService.list(); track t.id) {
+        <li class="item">
+          <div>
+
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</section>

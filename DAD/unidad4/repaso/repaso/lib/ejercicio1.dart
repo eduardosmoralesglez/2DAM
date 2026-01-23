@@ -36,17 +36,19 @@ class SemaforoPage extends State<SemaforoPageState> {
   }
 
   Text mensaje() {
-    if (contador == 1) {
-      return Text('STOP', style: TextStyle(color: Colors.red));
+      if (contador == 1) {
+        return Text('STOP', style: TextStyle(color: Colors.red));
+      }
+      if (contador == 2) {
+        return Text("PRECAUCION", style: TextStyle(color: Colors.yellow));
+      }
+      if (contador == 3) {
+        return Text("AVANZA", style: TextStyle(color: Colors.green));
+      }
+      return Text(contador.toString());
     }
-    if (contador == 2) {
-      return Text("PRECAUCION", style: TextStyle(color: Colors.yellow));
-    }
-    if (contador == 3) {
-      return Text("AVANZA", style: TextStyle(color: Colors.green));
-    }
-    return Text(contador.toString());
-  }
+    
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,10 @@ class SemaforoPage extends State<SemaforoPageState> {
               ),
             ),
             mensaje(),
-            ElevatedButton(onPressed: cambiarLuz, child: Text('Cambiar luz')),
+            ElevatedButton(
+              onPressed: cambiarLuz,
+              child: Text('Cambiar luz'),
+            ),
           ],
         ),
       ),
