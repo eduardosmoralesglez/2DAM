@@ -4,7 +4,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public final class SecurityUtils {
-    private SecurityUtils() {}
+    private SecurityUtils() {
+    }
 
     public static String username() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -13,7 +14,8 @@ public final class SecurityUtils {
 
     public static boolean isAdmin() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null) return false;
+        if (auth == null)
+            return false;
         return auth.getAuthorities().stream().anyMatch(a -> "ROLE_ADMIN".equals(a.getAuthority()));
     }
 }

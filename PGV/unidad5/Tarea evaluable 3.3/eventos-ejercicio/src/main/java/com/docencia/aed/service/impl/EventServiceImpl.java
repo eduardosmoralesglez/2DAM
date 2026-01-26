@@ -30,12 +30,12 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> listPublicApproved() {
-        throw new UnsupportedOperationException("TODO: implementar");
+        return repo.findByStatus(EventStatus.APPROVED);
     }
 
     @Override
     public Event getPublicApprovedById(Long id) {
-        throw new UnsupportedOperationException("TODO: implementar");
+        return repo.findById(id).orElse(null);
     }
 
     @Override

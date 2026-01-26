@@ -9,7 +9,8 @@ public class ApiError {
     private String message;
     private String path;
 
-    public ApiError() {}
+    public ApiError() {
+    }
 
     public ApiError(int status, String error, String message, String path) {
         this.status = status;
@@ -18,15 +19,43 @@ public class ApiError {
         this.path = path;
     }
 
-    public Instant getTimestamp() { return timestamp; }
-    public int getStatus() { return status; }
-    public String getError() { return error; }
-    public String getMessage() { return message; }
-    public String getPath() { return path; }
+    public Instant getTimestamp() {
+        return timestamp;
+    }
 
-    public void setTimestamp(Instant timestamp) { this.timestamp = timestamp; }
-    public void setStatus(int status) { this.status = status; }
-    public void setError(String error) { this.error = error; }
-    public void setMessage(String message) { this.message = message; }
-    public void setPath(String path) { this.path = path; }
+    public int getStatus() {
+        return status;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 }

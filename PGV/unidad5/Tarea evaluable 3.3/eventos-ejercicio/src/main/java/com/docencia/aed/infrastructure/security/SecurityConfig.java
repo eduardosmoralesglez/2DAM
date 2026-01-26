@@ -3,7 +3,6 @@ package com.docencia.aed.infrastructure.security;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -25,7 +24,8 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Para el ejercicio: passwords en claro. En producción usar BCryptPasswordEncoder.
+        // Para el ejercicio: passwords en claro. En producción usar
+        // BCryptPasswordEncoder.
         return NoOpPasswordEncoder.getInstance();
     }
 
@@ -49,8 +49,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http,
-                                          AppSecurityProperties props,
-                                          JwtAuthenticationFilter jwtFilter) throws Exception {
+            AppSecurityProperties props,
+            JwtAuthenticationFilter jwtFilter) throws Exception {
 
         http.csrf(csrf -> csrf.disable());
         http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
