@@ -39,7 +39,7 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.PATCH, "/api/v1/tasks/**").hasRole("ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/api/v1/tasks/**").hasRole("ADMIN")
 
-            .anyRequest().authenticated()
+            .anyRequest().permitAll()
         )
         .httpBasic(httpBasic -> httpBasic.disable());
 

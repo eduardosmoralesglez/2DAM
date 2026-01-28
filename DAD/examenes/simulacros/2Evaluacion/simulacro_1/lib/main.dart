@@ -1,94 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => CarritoModel(),
-      child: CafeteriaApp(),
-    ),
-  );
+  runApp(const NavigatorBasicoApp());
 }
 
-class CafeteriaApp extends StatelessWidget {
-  const CafeteriaApp({super.key});
+class NavigatorBasicoApp extends StatelessWidget {
+  const NavigatorBasicoApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CafeteriaPage(),
+      home: InicioPage(),
     );
   }
 }
 
-class CarritoModel extends ChangeNotifier {
-  double items = 0;
-  double total = 0;
-
-  void add(double precio) {
-    items++;
-    total = total + precio;
-    notifyListeners();
-  }
-
-  void clear() {
-    items = 0;
-    total = 0.0;
-    notifyListeners();
-  }
-}
-
-class CafeteriaPage extends StatelessWidget {
-  const CafeteriaPage({super.key});
+class InicioPage extends StatelessWidget {
+  const InicioPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double items = context.watch<CarritoModel>().items;
-    double total = context.watch<CarritoModel>().total;
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cafetería (Provider)'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      appBar: AppBar(title: const Text('Inicio')),
+      body: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            // RESUMEN (estático)
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black12),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Items: $items", style: TextStyle(fontSize: 18)),
-                  Text("Total: $total €", style: TextStyle(fontSize: 18)),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // PRODUCTOS (estático)
-            _Producto(nombre: 'Café', precio: 1.20),
-            _Producto(nombre: 'Tostada', precio: 1.80),
-            _Producto(nombre: 'Zumo', precio: 2.10),
-
-            const Spacer(),
-
-            // VACIAR (Provider)
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: context.watch<CarritoModel>().clear,
-                child: Text('Vaciar carrito'),
-              ),
-            ),
+            ElevatedButton(onPressed: (){
+              Navigator.push(context, const );
+            }, child: Text('Ir a Info')),
+            ElevatedButton(onPressed: (){
+              Navigator.push(context, );
+            }, child: Text('Ir a Contactos'))
           ],
         ),
       ),
@@ -96,23 +40,7 @@ class CafeteriaPage extends StatelessWidget {
   }
 }
 
-class _Producto extends StatelessWidget {
-  final String nombre;
-  final double precio;
-
-  const _Producto({required this.nombre, required this.precio});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text(nombre),
-        subtitle: Text('${precio.toStringAsFixed(2)} €'),
-        trailing: ElevatedButton(
-          onPressed: context.watch<CarritoModel>().add(precio),
-          child: const Text('Añadir'),
-        ),
-      ),
-    );
-  }
-}
+// TODO: Crea ContactoPage (StatelessWidget)
+// - Scaffold con AppBar "Contacto"
+// - Un texto con email/teléfono ficticio
+// - Botón "Volver" que haga Navigator.pop
