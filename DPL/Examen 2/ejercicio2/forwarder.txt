@@ -1,0 +1,8 @@
+options {
+        directory "/var/cache/bind";
+        forwarders {
+                10.108.255.0;
+        };
+        forward only;
+};
+

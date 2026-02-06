@@ -1,0 +1,117 @@
+root@ubuntu-server:/# dig www.tiendatec.es
+
+; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> www.tiendatec.es
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 12373
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;www.tiendatec.es.		IN	A
+
+;; ANSWER SECTION:
+www.tiendatec.es.	120	IN	A	5.196.197.184
+
+;; Query time: 56 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Wed Feb 04 19:09:15 UTC 2026
+;; MSG SIZE  rcvd: 61
+
+root@ubuntu-server:/# 
+
+root@ubuntu-server:/# dig NS dpl.es
+
+; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> NS dpl.es
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 54276
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;dpl.es.				IN	NS
+
+;; ANSWER SECTION:
+dpl.es.			1181	IN	NS	ns2.parkingcrew.net.
+dpl.es.			1181	IN	NS	ns1.parkingcrew.net.
+
+;; Query time: 1 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Wed Feb 04 19:12:20 UTC 2026
+;; MSG SIZE  rcvd: 86
+
+root@ubuntu-server:/# 
+
+root@ubuntu-server:/# dig info@dpl.es
+
+; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> info@dpl.es
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 52552
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;info\@dpl.es.			IN	A
+
+;; AUTHORITY SECTION:
+es.			1390	IN	SOA	ns1.nic.es. hostmaster.nic.es. 2026020410 7200 7200 2592000 86400
+
+;; Query time: 1 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Wed Feb 04 19:19:48 UTC 2026
+;; MSG SIZE  rcvd: 95
+
+root@ubuntu-server:/# 
+
+root@ubuntu-server:/# dig ns1.nic.es
+
+; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> ns1.nic.es
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 39491
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;ns1.nic.es.			IN	A
+
+;; ANSWER SECTION:
+ns1.nic.es.		86400	IN	A	194.69.254.1
+
+;; Query time: 90 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Wed Feb 04 19:21:27 UTC 2026
+;; MSG SIZE  rcvd: 55
+
+root@ubuntu-server:/#
+
+
+
+respuestas:
+
+- ¿Cuál es la dirección IPv4 del nombre de dominio www.tiendatec.es?
+
+    La dirección IPv4 es 5.196.197.184
+
+- ¿La consulta realizada es recursiva o iterativa? ¿el servidor DNS consultado admite consultas recursivas?
+
+    La consulta es iterativa. No las permite.
+    
+- ¿Cuál es el nombre de dominio del servidor de nombres autoritativo del dominio dpl.es?
+
+    Son dos servidores de nombres, el ns2.parkingcrew.net. y el ns1.parkingcrew.net.
+    
+- Realiza una consulta no recursiva (iterativa) al servidor autoritativo para solicitar la dirección IPv6 del nombre de domino www.dpl.es. Anota la dirección IPv6 obtenida. ¿La respuesta obtenida es autoritativa? ¿por qué?
+    
+
+
+- ¿En qué dirección IPv4 está el servidor de correo electrónico del buzón info@dpl.es? ¿cuál es su nombre de domino?
+    
+    La dirección es 194.69.254.1 y su nombre de dominio es ns1.nic.es 
+
